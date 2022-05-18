@@ -1,0 +1,32 @@
+:root{
+  /*Low opacity Dark*/
+  --clr-primary-100: rgb(26,42,51);
+
+  /*Higher opacity Dark*/
+  --clr-primary-200: rgb(30,55,65);
+
+  /*Grayish Color*/
+  --clr-primary-300: rgb(169,190,201);
+
+  /*Low Opacity Grayish*/
+  --clr-primary-400: rgb(98,120,132);
+
+  /*Very Bright Yellow*/
+  --clr-primary-500: rgb(255,201,97);
+
+  /*Very Bright Green*/
+  --clr-primary-600: rgb(49,195,189);
+
+  /*Very Low opacity Grayish*/
+  --clr-neutral-100: rgb(35,50,59);
+
+  /*Very High Opacity Dark*/
+  --clr-neutral-200: rgb(17,32,42);
+
+  --ff-primary: 'Barlow Semi Condensed', sans-serif;
+
+  --br: .5rem;
+
+  --fs-100: .8125rem;
+
+}
