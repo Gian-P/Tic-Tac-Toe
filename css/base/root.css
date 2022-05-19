@@ -1,32 +1,28 @@
 :root{
-  /*Low opacity Dark*/
-  --clr-primary-100: rgb(26,42,51);
+  --clr-primary-100: #1a2a33;
 
-  /*Higher opacity Dark*/
-  --clr-primary-200: rgb(30,55,65);
+  --clr-primary-200: #1f3641;
 
-  /*Grayish Color*/
-  --clr-primary-300: rgb(169,190,201);
+  --clr-primary-300: #a8bfc9;
 
-  /*Low Opacity Grayish*/
-  --clr-primary-400: rgb(98,120,132);
+  --clr-primary-400: #a8bfc9;
 
-  /*Very Bright Yellow*/
-  --clr-primary-500: rgb(255,201,97);
+  --clr-primary-500: #10212a;
 
-  /*Very Bright Green*/
-  --clr-primary-600: rgb(49,195,189);
+  --clr-primary-600: #1a2a33;
 
-  /*Very Low opacity Grayish*/
-  --clr-neutral-100: rgb(35,50,59);
+  --clr-primary-700: #f2b137;
 
-  /*Very High Opacity Dark*/
-  --clr-neutral-200: rgb(17,32,42);
+  --clr-primary-800: #cc8b13;
+  
+  --clr-primary-900: #31c3bd;
 
+  --clr-primary-1000: #118c87;
+/*
   --ff-primary: 'Barlow Semi Condensed', sans-serif;
 
   --br: .5rem;
 
-  --fs-100: .8125rem;
+  --fs-100: .8125rem;*/
 
 }

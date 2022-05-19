@@ -1,0 +1,10 @@
+@media (max-width: 500px){
+  .large{
+    font-size: 1.6rem;
+    line-height: 20.16px;
+    letter-spacing: 1px;
+    font-weight: 700;
+    color: var(--clr-primary-600);
+    font-family: outfit;
+  }
+}
