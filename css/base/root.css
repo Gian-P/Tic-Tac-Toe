@@ -14,15 +14,11 @@
   --clr-primary-700: #f2b137;
 
   --clr-primary-800: #cc8b13;
-  
+
   --clr-primary-900: #31c3bd;
 
   --clr-primary-1000: #118c87;
-/*
-  --ff-primary: 'Barlow Semi Condensed', sans-serif;
 
-  --br: .5rem;
-
-  --fs-100: .8125rem;*/
+  --ff-primary: "Outfit", "sans-serif";
 
 }
