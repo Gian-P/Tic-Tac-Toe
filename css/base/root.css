@@ -19,6 +19,14 @@
 
   --clr-primary-1000: #118c87;
 
+  --clr-neutral-100: rgba(168,191,201,.05);
+
+  --clr-neutral-200: #ffc860;
+
+  --clr-neutral-300: #65e9e4;
+
+  
+
   --ff-primary: "Outfit", "sans-serif";
 
 }

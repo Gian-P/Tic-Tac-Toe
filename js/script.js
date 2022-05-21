@@ -1,4 +1,6 @@
 let Mark_choice_container = document.getElementById("Mark_choice_container");
+
+let orange = document.getElementById("orange");
 let svg_s = document.getElementsByTagName("path");
 let estilos = document.styleSheets;
 
@@ -6,6 +8,7 @@ let players_choice_x = document.getElementById("player's_choice_x");
 let players_choice_o = document.getElementById("player's_choice_o");
  
 players_choice_x.addEventListener("click",CheckChoice); 
+
 players_choice_o.addEventListener("click",CheckChoice);
 
 function CheckChoice(e){
@@ -33,3 +36,8 @@ function CheckChoice(e){
     svg_s[1].setAttribute("fill","#1F3641");
   }
 }
+
+function LoadGame(){
+  location.href = "CpuVsPlayer.html";
+}
+

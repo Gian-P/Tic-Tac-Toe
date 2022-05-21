@@ -3,26 +3,21 @@
   margin: 0 auto;
   padding: 0 2.4rem;
   display: flex;
-  /*justify-content: center;*/
   align-items: center;
   height: 100vh;
 }
 
 .game-menu{
-  /*opacity: 1;*/
-  /*transform: none;*/
   flex: 1 1;
 }
 
 .game-menu-header{
   display: flex;
-  /*align-items: center;*/
   justify-content: center;
-  /*grid-gap: 6px;*/
   gap: 6px;
 }
 
-.game-menu img, .game-menu svg {
+.game-menu-header img, .mark-choices-choice svg {
   width: 3.2rem;
 }
 
@@ -39,7 +34,6 @@
   font-size: 1.6rem;
   line-height: 2.016rem;
   letter-spacing: 0.1rem;
-  /*font-weight: 700;*/
   color: var(--clr-primary-300);
   padding-left: 2px;
 }
@@ -51,20 +45,16 @@
   background-color: var(--clr-primary-100);
   position: relative;
   display: flex;
-  align-items: center;
   justify-content: center;
   border-radius: 1rem;
 }
 
 .mark-choices-choice{
   flex: 1 1;
-  height: 100%;
   display: flex;
-  /*align-items: center;*/
   justify-content: center;
   cursor: pointer;
   z-index: 2;
-  transition: background-color .2s ease-out;
 }
 
 .game-menu-marks label{
@@ -84,14 +74,12 @@
   transform: translateY(1px);
 }
 
-button {
+.game-menu-cta button {
   border: none;
   color: var(--clr-primary-600);
   cursor: pointer;
-  transition: background-color .25s ease-out;
   width: 100%;
-  transition: box-shadow .1s ease-out,-webkit-transform .1s ease-out;
-  transition: box-shadow .1s ease-out,transform .1s ease-out;
+  position: relative;
   transition: box-shadow .1s ease-out,transform .1s ease-out,-webkit-transform .1s ease-out;
 }
 
@@ -107,7 +95,6 @@ a{
   line-height: 2.52rem;
   letter-spacing: 0.125rem;
   font-weight: 700;
-  /*color: var(--clr-primary-600);*/
 }
 
 .orange{
@@ -121,14 +108,21 @@ a{
   padding-left: 3.4rem;
 }
 
-i{
+.game-menu-cta button i{
   font-style: normal;
-  transition: -webkit-transform .1s ease-out;
-  transition: transform .1s ease-out;
-  transition: transform .1s ease-out,-webkit-transform .1s ease-out;
-  display: inline-block;
 }
 
+.game-menu-marks .mark-choices:after {
+  content: "";
+  position: absolute;
+  top: 9px;
+  bottom: 9px;
+  width: calc(50% - 8px);
+  background-color: var(--clr-primary-300);
+  border-radius: 10px;
+  z-index: 1;
+  transition: transform .3s ease-in-out;
+}
 
 .game-menu-marks .mark-choices.o:after {
   -webkit-transform: translate3d(50%,0,0);
@@ -140,30 +134,40 @@ i{
   transform: translate3d(-50%,0,0);
 }
 
-.game-menu-marks .mark-choices:after {
-  content: "";
-  position: absolute;
-  top: 9px;
-  bottom: 9px;
-  width: calc(50% - 8px);
-  background-color: #a8bfc9;
-  border-radius: 10px;
-  z-index: 1;
-  transition: -webkit-transform .3s ease-in-out;
-  transition: transform .3s ease-in-out;
-  transition: transform .3s ease-in-out,-webkit-transform .3s ease-in-out;
-  will-change: transform;
-}
-
-.game-menu-marks .mark-choices-choice:hover {
-  background-color: rgba(168,191,201,.05);
-  border-radius: 10px;
+.mark-choices-choice:hover {
+  background-color: var(--clr-neutral-100);
+  border-radius: 1rem;
 }
 
 .orange:hover{
-  background: #ffc860;
+  background: var(--clr-neutral-200);
 }
 
 .green:hover{
-  background: #65e9e4;
+  background: var(--clr-neutral-300);
 }
+
+.game-menu-cta .orange:active{
+  border-radius: 1.5rem;
+  top: 4px;
+  box-shadow: inset 0 -4px 0 var(--clr-primary-800);
+}
+
+.game-menu-cta .green:active{
+  border-radius: 1.5rem;
+  top: 4px;
+  box-shadow: inset 0 -4px 0 var(--clr-primary-900);
+}
+
+
+.game-menu-marks .mark-choices-choice svg path {
+  transition: fill .2s ease-in-out;
+  will-change: fill;
+  transition-delay: .1s;
+}
+
+.game-menu-marks .mark-choices-choice svg:last-child {
+  transform: translateX(1px);
+}
+
+
