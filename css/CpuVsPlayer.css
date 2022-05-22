@@ -1,2 +1,5 @@
 @import './base/root.css';
 @import './base/reset.css';
+@import './base/global.css';
+@import './components/SecondView.css';
+@import './media-queries/media-queriesSV.css';

@@ -1,0 +1,21 @@
+@media (max-width: 440px){
+  .Center label{
+    font-size: 1.4rem;
+    line-height: 16.64px;
+    letter-spacing: .88px;
+    font-weight: 700;
+    color: #a8bfc9;
+  } 
+
+  .Center{
+    gap: 9px;
+    padding: 0 10px 3px;
+  }
+}
+
+@media (max-width: 520px){
+  .Grid_Container{
+    height: 87.5vw;
+    margin: 64px 0 20px;
+  }
+}

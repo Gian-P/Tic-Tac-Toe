@@ -2,4 +2,4 @@
 @import './base/reset.css';
 @import './base/global.css';
 @import './components/FirstView.css';
-@import './base/media-queries.css';
+@import './media-queries/media-queriesFV.css';

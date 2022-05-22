@@ -1,0 +1,124 @@
+main{
+}
+
+.container{
+  max-width: 508px;
+  margin: 0 auto;
+  padding: 0 24px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.Game_Container{
+  flex: 1 1;
+  height: 54vh;
+}
+
+.Game_Container_Header{
+  display: flex;
+  min-height: 40px;
+  justify-content: space-between;
+}
+
+.Left_Side_Container{
+  margin-top: 3px;
+}
+
+.Left_Side{
+  display: flex;
+  gap: 6px;
+  width: 72px;
+}
+
+.Left_Side img{
+  min-width: 32px;
+  min-height: 32px;
+}
+
+.Center_Container{
+  background-color: #1f3641;
+  box-shadow: inset 0 -4px 0 #10212a;
+  border-radius: 10px;
+  transform: translateX(-35px);
+}
+
+.Center{
+  display: flex;
+  width: 96px;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  
+}
+
+.Center img{
+  min-width: 16px;
+  min-height: 16px;
+  max-width: 16px;
+  max-height: 16px;
+}
+
+.Center label{
+
+}
+
+.Right_Side_Container{
+
+}
+
+.Right_Side{
+
+}
+
+.Grid_Container{
+  display: grid;
+  grid-template: repeat(3,1fr)/repeat(3,1fr);
+  gap: 20px;
+  height: 460px;
+  margin: 20px 0 19px;
+}
+
+.game_board_cell{
+  background-color: var(--clr-primary-200);
+  border-radius: 15px;
+  /*
+  display: flex;
+  align-items: center;
+  justify-content: center;*/
+  box-shadow: inset 0 -8px 0 #10212a;
+  max-height: 140px;
+  transition: box-shadow .1s ease-out,transform .1s ease-out,max-height .1s ease-out,-webkit-transform .1s ease-out;
+}
+
+.Score_Container{
+  display: flex;
+  gap: 20px;
+}
+
+.Human_Wins{
+  flex: 1 1;
+  height: 64px;
+  background-color: var(--clr-primary-700);
+  border-radius: 15px;
+}
+
+.Human_Wins div{
+  display: flex;
+  flex-direction: column;
+}
+
+.Ties{
+  flex: 1 1;
+  height: 64px;
+  background-color: var(--clr-primary-300);
+  border-radius: 15px;
+}
+
+.Pc_Wins{
+  flex: 1 1;
+  height: 64px;
+  background-color: var(--clr-primary-900);
+  border-radius: 15px;
+}
