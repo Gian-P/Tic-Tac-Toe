@@ -1,4 +1,5 @@
 main{
+  
 }
 
 .container{
@@ -13,7 +14,6 @@ main{
 
 .Game_Container{
   flex: 1 1;
-  height: 54vh;
 }
 
 .Game_Container_Header{
@@ -41,34 +41,73 @@ main{
   background-color: #1f3641;
   box-shadow: inset 0 -4px 0 #10212a;
   border-radius: 10px;
-  transform: translateX(-35px);
+  transform: translateX(-11px);
 }
 
 .Center{
   display: flex;
-  width: 96px;
   justify-content: center;
   align-items: center;
+  gap: 12px;
   height: 100%;
-  
+  width: 140px;
+  padding: 0 10px 6px;
 }
 
 .Center img{
-  min-width: 16px;
-  min-height: 16px;
-  max-width: 16px;
-  max-height: 16px;
+  width: 20px;
 }
 
 .Center label{
-
+  font-size: 1.6rem;
+  line-height: 0;
+  letter-spacing: 1px;
+  font-weight: 700;
+  color: #a8bfc9;
 }
 
 .Right_Side_Container{
 
 }
 
-.Right_Side{
+button{
+  border: none;
+  color: #1a2a33;
+  cursor: pointer;
+  transition: box-shadow .1s ease-out,transform .1s ease-out,-webkit-transform .1s ease-out;
+}
+
+.Right_Side_Button{
+  background: var(--clr-primary-400);
+  box-shadow: inset 0 -4px 0 var(--clr-neutral-500);
+  height: 52px;
+  padding: 0 16px;
+  border-radius: 10px;
+  width: auto;
+  position: relative;
+}
+
+.Right_Side_Button:active{
+  top: 2px;
+  box-shadow: inset 0 -2px 0 var(--clr-neutral-500);
+}
+
+.icon div{
+  position: relative;
+  top: 2px;
+  transition: transform .1s ease-out,-webkit-transform .1s ease-out;
+  display: inline-block;
+}
+
+.icon div img{
+  padding-bottom: 2px;
+}
+
+.Right_Side_Button:hover{
+  background: var(--clr-neutral-400);
+}
+
+.icon{
 
 }
 
@@ -92,33 +131,94 @@ main{
   transition: box-shadow .1s ease-out,transform .1s ease-out,max-height .1s ease-out,-webkit-transform .1s ease-out;
 }
 
+.game_board_cell.empty{
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+}
+
 .Score_Container{
   display: flex;
   gap: 20px;
 }
 
-.Human_Wins{
+.Game_Scores{
   flex: 1 1;
-  height: 64px;
-  background-color: var(--clr-primary-700);
   border-radius: 15px;
-}
-
-.Human_Wins div{
+  height: 72px;
   display: flex;
   flex-direction: column;
+  justify-content: center;
+  text-align: center;
+}
+
+.X_Wins{
+  background-color: var(--clr-primary-900);
 }
 
 .Ties{
-  flex: 1 1;
-  height: 64px;
+  
   background-color: var(--clr-primary-300);
-  border-radius: 15px;
 }
 
-.Pc_Wins{
-  flex: 1 1;
-  height: 64px;
-  background-color: var(--clr-primary-900);
+.O_Wins{
+  background-color: var(--clr-primary-700);
+}
+
+.Game_Scores label{
+  font-size: 1.4rem;
+  line-height: 17.64px;
+  letter-spacing: .88px;
+  font-weight: 500;
+  color: #1f3641;
+  text-transform: uppercase;
+}
+
+.Game_Scores b{
+  font-size: 2.4rem;
+  line-height: 30.24px;
+  letter-spacing: 1.5px;
+  font-weight: 700;
+  color: #1f3641;
+}
+
+.game_board_cell.empty::after{
+  content: "";
+  position: absolute;
+  inset: 0;
+  bottom: 0;
+  background-size: 30%;
+  background-repeat: no-repeat;
+  background-position: 50%;
+  background-color: #1f3641;
+  transition: background-size .2s ease-out,opacity .2s ease-out;
   border-radius: 15px;
+  box-shadow: inset 0 -8px 0 #10212a;
+  opacity: 0;
+}
+
+.game_board_cell.empty.preview-o::after{
+  background-image: url("/images/icons/icon-o-outline.svg");
+  background-size: 64px;
+  opacity: 1;
+}
+
+.game_board_cell.active.o{
+  background: url("/images/icons/icon-o-bright-yellow.svg")
+  no-repeat 50% #1f3641;
+}
+
+.game_board_cell.active.x{
+  background: url("/images/icons/icon-x-bright-green.svg") no-repeat 50% #1f3641;
+}
+
+.game_board_cell.active{
+  transform: translateY(4px);
+  max-height: 136px;
+}
+
+.game_board_cell.active {
+  /*pointer-events: none;*/
+  cursor: default;
+  box-shadow: inset 0 -4px 0 #10212a;
 }

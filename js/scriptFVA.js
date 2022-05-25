@@ -38,6 +38,6 @@ function CheckChoice(e){
 }
 
 function LoadGame(){
-  location.href = "CpuVsPlayer.html";
+  location.href = "PlayerVsPlayer.html";
 }
 

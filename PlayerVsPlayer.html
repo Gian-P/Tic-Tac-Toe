@@ -4,7 +4,8 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="./css/CpuVsPlayer.css">
+  <script src="./js/ScriptSVA.js" defer></script>
+  <link rel="stylesheet" href="./css/PlayerVsPlayer.css">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@700&display=swap" rel="stylesheet">  
@@ -14,11 +15,8 @@
 <body>
   <main>
     <div class="container">
-
       <div class="Game_Container">
-
         <div class="Game_Container_Header">
-
           <div class="Left_Side_Container">
             <div class="Left_Side">
               <img src="./images/icons/icon-x-bright-green.svg" alt="">
@@ -34,9 +32,11 @@
           </div>
 
           <div class="Right_Side_Container">
-              <div class="Right_Side">
-
+            <button class="Right_Side_Button icon">
+              <div>
+                <img src="./images/icons/icon-restart.svg" alt="">
               </div>
+            </button>
           </div>
 
         </div>
@@ -57,27 +57,22 @@
 
         <div class="Score_Container">
 
-          <div class="Human_Wins">
-            <div>
-              <label>"o"
-                " (YOU)"
-              </label>
+          <div class="Game_Scores X_Wins">
+              <label>x</label>
+              <label>(player 1)</label>
               <b>0</b>
-            </div>
           </div>
 
-          <div class="Ties">
-            <div>
-              
-            </div>
+          <div class="Game_Scores Ties">
+              <label>TIES</label>
+              <b>0</b>
           </div>
 
-          <div class="Pc_Wins">
-            <div>
-              
-            </div>
+          <div class="Game_Scores O_Wins">
+              <label>o</label>
+              <label>(player 2)</label>
+              <b>0</b>
           </div>
-
         </div>
 
       </div>

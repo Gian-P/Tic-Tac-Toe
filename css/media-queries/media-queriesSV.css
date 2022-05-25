@@ -8,8 +8,46 @@
   } 
 
   .Center{
+    width: 96px;/**/
     gap: 9px;
     padding: 0 10px 3px;
+  }
+
+  .Center img{
+    width: 16px;
+  }
+
+  .Right_Side_Button{
+    height: 40px;
+    padding: 0 10px;
+  }
+
+  .icon div img{
+    width: 15.38px;
+    padding-bottom: 0;
+  }
+
+}
+
+@media (max-width: 500px){
+  .Game_Scores{
+    height: 64px;
+  }
+
+  .Game_Scores label{
+    font-size: 1.2rem;
+    line-height: 15.12px;
+    letter-spacing: .75px;
+    font-weight: 500;
+    color: #1f3641;
+  }
+
+  .Game_Scores b{
+    font-size: 2rem;
+    line-height: 25.2px;
+    letter-spacing: 1.25px;
+    font-weight: 700;
+    color: #1f3641;
   }
 }
 
