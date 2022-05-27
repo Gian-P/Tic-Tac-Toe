@@ -7,15 +7,15 @@ for(const cell of cells){
 }
 
 function mouseover(event){
-  event.target.className += " preview-o";
+  event.target.className += " preview-x";
 }
 
 function mouseleave(event){
-  event.target.className = " game_board_cell empty";
+  event.target.className = "game_board_cell empty";
 }
 
 function click(event){
-  event.target.className = "game_board_cell active o";
+  event.target.className = "game_board_cell active x";
   event.target.removeEventListener("mouseover",mouseover);
   event.target.removeEventListener("mouseout",mouseleave);
 }

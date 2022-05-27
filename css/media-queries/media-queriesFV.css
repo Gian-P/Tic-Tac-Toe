@@ -1,8 +1,8 @@
-@media (max-width: 500px){
+@media (max-width: 31.25em){ /*500px*/
   .large{
     font-size: 1.6rem;
-    line-height: 20.16px;
-    letter-spacing: 1px;
+    line-height: 2.016rem;
+    letter-spacing: 0.1rem;
     font-weight: 700;
     color: var(--clr-primary-600);
   }

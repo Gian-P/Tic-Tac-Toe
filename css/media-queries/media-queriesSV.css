@@ -1,59 +1,67 @@
-@media (max-width: 440px){
-  .Center label{
-    font-size: 1.4rem;
-    line-height: 16.64px;
-    letter-spacing: .88px;
-    font-weight: 700;
-    color: #a8bfc9;
-  } 
-
-  .Center{
-    width: 96px;/**/
-    gap: 9px;
-    padding: 0 10px 3px;
+@media (max-width: 32.5em){ /*520px*/
+  .Grid_Container{
+    height: 87.5vw;
+    margin: 6.4rem 0 2rem;
   }
 
-  .Center img{
-    width: 16px;
+  .game_board_cell.active.o{
+    background-size: 4.5rem;
+    background-position: 50%;
   }
-
-  .Right_Side_Button{
-    height: 40px;
-    padding: 0 10px;
-  }
-
-  .icon div img{
-    width: 15.38px;
-    padding-bottom: 0;
-  }
-
 }
 
-@media (max-width: 500px){
+@media (max-width: 31.25em){ /*500px*/
   .Game_Scores{
-    height: 64px;
+    height: 6.4rem;
   }
 
   .Game_Scores label{
     font-size: 1.2rem;
-    line-height: 15.12px;
+    line-height: 1.512rem;
     letter-spacing: .75px;
-    font-weight: 500;
     color: #1f3641;
   }
 
   .Game_Scores b{
     font-size: 2rem;
-    line-height: 25.2px;
+    line-height: 2.52rem;
     letter-spacing: 1.25px;
     font-weight: 700;
     color: #1f3641;
   }
 }
 
-@media (max-width: 520px){
-  .Grid_Container{
-    height: 87.5vw;
-    margin: 64px 0 20px;
+@media (max-width: 27.5em){ /*440px*/
+  .Center label{
+    font-size: 1.4rem;
+    line-height: 1.664rem;
+    letter-spacing: .88px;
+    color: #a8bfc9;
+  } 
+
+  .Center{
+    width: 9.6rem;
+    gap: 9px;
+    padding: 0 1rem 0.3rem;
+  }
+
+  .Center img{
+    width: 1.6rem;
+  }
+
+  .Right_Side_Button{
+    height: 4rem;
+    padding: 0 1rem;
+  }
+
+  .icon div img{
+    width: 1.538rem;
+    padding-bottom: 0;
+  }
+}
+
+@media (max-width: 21.875em){ /*350px*/
+  .game_board_cell.active.o{
+    background-size: 3.3rem;
   }
 }
