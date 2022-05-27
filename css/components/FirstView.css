@@ -97,12 +97,12 @@ a{
   font-weight: 700;
 }
 
-.orange{
+.button-orange{
   background: var(--clr-primary-700);
   box-shadow: inset 0 -8px 0 var(--clr-primary-800);
 }
 
-.green{
+.button-green{
   background: var(--clr-primary-900);
   box-shadow: inset 0 -8px 0 var(--clr-primary-1000);
   padding-left: 3.4rem;
@@ -139,21 +139,21 @@ a{
   border-radius: 1rem;
 }
 
-.orange:hover{
+.button-orange:hover{
   background: var(--clr-neutral-200);
 }
 
-.green:hover{
+.button-green:hover{
   background: var(--clr-neutral-300);
 }
 
-.game-menu-cta .orange:active{
+.game-menu-cta .button-orange:active{
   border-radius: 1.5rem;
   top: 4px;
   box-shadow: inset 0 -4px 0 var(--clr-primary-800);
 }
 
-.game-menu-cta .green:active{
+.game-menu-cta .button-green:active{
   border-radius: 1.5rem;
   top: 4px;
   box-shadow: inset 0 -4px 0 var(--clr-primary-900);

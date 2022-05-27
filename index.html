@@ -5,13 +5,12 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <script src="./js/scriptFVA.js" defer></script>
-
+  <script src="./js/index.js" defer></script>
   <link rel="stylesheet" href="./css/index.css" id="estilos">
-  
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@700&display=swap" rel="stylesheet">  
+
   <title>Document</title>
 </head>
 <body>
@@ -27,7 +26,7 @@
   
         <div class="game-menu-marks">
           <h1>PICK PLAYER 1'S MARK</h1>
-          <div class="mark-choices o" id="Mark_choice_container">
+          <div class="mark-choices o" id="mark_choice_container"> 
 
             <div class="mark-choices-choice x" id="player's_choice_x">
                 <svg viewBox = "0 0 64 64" xmlns="http://www.w3.org/2000/svg" class="x"><path class = "x" d="M15.002 1.147 32 18.145 48.998 1.147a3 3 0 0 1 4.243 0l9.612 9.612a3 3 0 0 1 0 4.243L45.855 32l16.998 16.998a3 3 0 0 1 0 4.243l-9.612 9.612a3 3 0 0 1-4.243 0L32 45.855 15.002 62.853a3 3 0 0 1-4.243 0L1.147 53.24a3 3 0 0 1 0-4.243L18.145 32 1.147 15.002a3 3 0 0 1 0-4.243l9.612-9.612a3 3 0 0 1 4.243 0Z" fill="#A8BFC9"/></svg>
@@ -45,11 +44,11 @@
 
         <div class="game-menu-cta">
 
-          <button class="orange large">
+          <button class="button-orange large" id="button-orange">
             <i>NEW GAME (VS CPU)</i>
           </button>    
 
-            <button class="green large" onclick="LoadGame()">
+            <button class="button-green large" id="button_green">
               <i>NEW GAME (VS PLAYER)</i>
             </button>  
 

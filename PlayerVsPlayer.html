@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <script src="./js/ScriptSVA.js" defer></script>
+  <script src="./js/PlayerVsPlayer.js" defer></script>
   <link rel="stylesheet" href="./css/PlayerVsPlayer.css">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -15,24 +15,24 @@
 <body>
   <main>
     <div class="container">
-      <div class="Game_Container">
-        <div class="Game_Container_Header">
-          <div class="Left_Side_Container">
-            <div class="Left_Side">
+      <div class="game-container">
+        <div class="game-container-header">
+          <div class="left-side-container">
+            <div class="left-side">
               <img src="./images/icons/icon-x-bright-green.svg" alt="">
               <img src="./images/icons/icon-o-bright-yellow.svg" alt="">
             </div>
           </div>
 
-          <div class="Center_Container">
-            <div class="Center">
+          <div class="center-container">
+            <div class="center">
               <img src="./images/icons/icon-x-grey.svg" alt="">
-              <label >TURN</label>
+              <label>TURN</label>
             </div>
           </div>
 
-          <div class="Right_Side_Container">
-            <button class="Right_Side_Button icon">
+          <div class="right-side-container">
+            <button class="right-side-button icon">
               <div>
                 <img src="./images/icons/icon-restart.svg" alt="">
               </div>
@@ -41,34 +41,34 @@
 
         </div>
 
-        <div class="Grid_Container">
+        <div class="grid-container">
 
-          <div class="game_board_cell empty"></div>
-          <div class="game_board_cell empty"></div>
-          <div class="game_board_cell empty"></div>
-          <div class="game_board_cell empty"></div>
-          <div class="game_board_cell empty"></div>
-          <div class="game_board_cell empty"></div>
-          <div class="game_board_cell empty"></div>
-          <div class="game_board_cell empty"></div>
-          <div class="game_board_cell empty"></div>
+          <div class="game-board-cell empty"></div>
+          <div class="game-board-cell empty"></div>
+          <div class="game-board-cell empty"></div>
+          <div class="game-board-cell empty"></div>
+          <div class="game-board-cell empty"></div>
+          <div class="game-board-cell empty"></div>
+          <div class="game-board-cell empty"></div>
+          <div class="game-board-cell empty"></div>
+          <div class="game-board-cell empty"></div>
 
         </div>
 
-        <div class="Score_Container">
+        <div class="score-container">
 
-          <div class="Game_Scores X_Wins">
+          <div class="game-scores x-wins">
               <label>x</label>
               <label>(player 1)</label>
               <b>0</b>
           </div>
 
-          <div class="Game_Scores Ties">
+          <div class="game-scores ties">
               <label>TIES</label>
               <b>0</b>
           </div>
 
-          <div class="Game_Scores O_Wins">
+          <div class="game-scores o-wins">
               <label>o</label>
               <label>(player 2)</label>
               <b>0</b>

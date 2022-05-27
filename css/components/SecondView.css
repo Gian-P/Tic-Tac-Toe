@@ -11,37 +11,37 @@ main{
   height: 100vh;
 }
 
-.Game_Container{
+.game-container{
   flex: 1 1;
 }
 
-.Game_Container_Header{
+.game-container-header{
   display: flex;
   justify-content: space-between;
 }
 
-.Left_Side_Container{
+.left-side-container{
   margin-top: 3px;
 }
 
-.Left_Side{
+.left-side{
   display: flex;
   gap: 0.6rem;
   width: 7.2rem;
 }
 
-.Left_Side img{
+.left-side img{
   min-width: 3.2rem;
 }
 
-.Center_Container{
+.center-container{
   background-color: #1f3641;
   box-shadow: inset 0 -4px 0 #10212a;
   border-radius: 1rem;
   transform: translateX(-11px);
 }
 
-.Center{
+.center{
   display: flex;
   justify-content: center;
   align-items: center;
@@ -51,18 +51,18 @@ main{
   padding: 0 1rem 0.6rem;
 }
 
-.Center img{
+.center img{
   width: 2rem;
 }
 
-.Center label{
+.center label{
   font-size: 1.6rem;
   line-height: 0;
   letter-spacing: 1px;
   color: #a8bfc9;
 }
 
-.Right_Side_Container{
+.right-side-container{
 
 }
 
@@ -72,7 +72,7 @@ button{
   transition: box-shadow .1s ease-out,transform .1s ease-out,-webkit-transform .1s ease-out;
 }
 
-.Right_Side_Button{
+.right-side-button{
   background: var(--clr-primary-400);
   box-shadow: inset 0 -4px 0 var(--clr-neutral-500);
   height: 5.2rem;
@@ -82,7 +82,7 @@ button{
   position: relative;
 }
 
-.Right_Side_Button:active{
+.right-side-button:active{
   top: 2px; 
   box-shadow: inset 0 -2px 0 var(--clr-neutral-500);
 }
@@ -98,7 +98,7 @@ button{
   padding-bottom: 2px;
 }
 
-.Right_Side_Button:hover{
+.right-side-button:hover{
   background: var(--clr-neutral-400);
 }
 
@@ -106,7 +106,7 @@ button{
 
 }
 
-.Grid_Container{
+.grid-container{
   display: grid;
   grid-template: repeat(3,1fr)/repeat(3,1fr);
   gap: 2rem;
@@ -114,19 +114,19 @@ button{
   margin: 2rem 0 1.9rem;
 }
 
-.game_board_cell{
+.game-board-cell{
   background-color: var(--clr-primary-200);
   border-radius: 1.5rem;
   box-shadow: inset 0 -8px 0 #10212a;
   transition: box-shadow .1s ease-out,transform .1s ease-out,max-height .1s ease-out,-webkit-transform .1s ease-out;
 }
 
-.game_board_cell.empty{
+.game-board-cell.empty{
   cursor: pointer;
   position: relative;
 }
 
-.game_board_cell.empty::after{
+.game-board-cell.empty::after{
   content: "";
   position: absolute;
   inset: 0;
@@ -141,40 +141,40 @@ button{
   opacity: 0;
 }
 
-.game_board_cell.empty.preview-o::after{
+.game-board-cell.empty.preview-o::after{
   background-image: url("/images/icons/icon-o-outline.svg");
   background-size: 6.4rem;
   opacity: 1;
 }
 
-.game_board_cell.active.o{
+.game-board-cell.active.o{
   background: url("/images/icons/icon-o-bright-yellow.svg")
   no-repeat 50% #1f3641;
 }
 
-.game_board_cell.empty.preview-x::after{
+.game-board-cell.empty.preview-x::after{
   background-image: url("/images/icons/icon-x-outline.svg");
   background-size: 6.4rem;
   opacity: 1;
 }
 
-.game_board_cell.active.x{
+.game-board-cell.active.x{
   background: url("/images/icons/icon-x-bright-green.svg") no-repeat 50% #1f3641;
 }
 
-.game_board_cell.active{
+.game-board-cell.active{
   transform: translateY(4px);
   max-height: 13.6rem;
   cursor: default;
   box-shadow: inset 0 -4px 0 #10212a;
 }
 
-.Score_Container{
+.score-container{
   display: flex;
   gap: 2rem;
 }
 
-.Game_Scores{
+.game-scores{
   flex: 1 1;
   border-radius: 1.5rem;
   height: 7.2rem;
@@ -184,20 +184,19 @@ button{
   text-align: center;
 }
 
-.X_Wins{
+.x-wins{
   background-color: var(--clr-primary-900);
 }
 
-.Ties{
-  
+.ties{
   background-color: var(--clr-primary-300);
 }
 
-.O_Wins{
+.o-wins{
   background-color: var(--clr-primary-700);
 }
 
-.Game_Scores label{
+.game-scores label{
   font-size: 1.4rem;
   line-height: 1.764rem;
   letter-spacing: .88px;
@@ -205,7 +204,7 @@ button{
   text-transform: uppercase;
 }
 
-.Game_Scores b{
+.game-scores b{
   font-size: 2.4rem;
   line-height: 3.024rem;
   letter-spacing: 0.15rem;
