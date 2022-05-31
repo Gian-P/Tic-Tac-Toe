@@ -26,7 +26,7 @@
 
           <div class="center-container">
             <div class="center">
-              <img src="./images/icons/icon-x-grey.svg" alt="">
+              <img src="./images/icons/icon-x-grey.svg" alt="" id="turn_figure">
               <label>TURN</label>
             </div>
           </div>
@@ -43,15 +43,15 @@
 
         <div class="grid-container">
 
-          <div class="game-board-cell empty"></div>
-          <div class="game-board-cell empty"></div>
-          <div class="game-board-cell empty"></div>
-          <div class="game-board-cell empty"></div>
-          <div class="game-board-cell empty"></div>
-          <div class="game-board-cell empty"></div>
-          <div class="game-board-cell empty"></div>
-          <div class="game-board-cell empty"></div>
-          <div class="game-board-cell empty"></div>
+          <div class="game-board-cell empty" id="00"></div>
+          <div class="game-board-cell empty" id="01"></div>
+          <div class="game-board-cell empty" id="02"></div>
+          <div class="game-board-cell empty" id="10"></div>
+          <div class="game-board-cell empty" id="11"></div>
+          <div class="game-board-cell empty" id="12"></div>
+          <div class="game-board-cell empty" id="20"></div>
+          <div class="game-board-cell empty" id="21"></div>
+          <div class="game-board-cell empty" id="22"></div>
 
         </div>
 
@@ -59,7 +59,7 @@
 
           <div class="game-scores x-wins">
               <label>x</label>
-              <label>(player 1)</label>
+              <label id="x_player">(player 1)</label>
               <b>0</b>
           </div>
 
@@ -70,7 +70,7 @@
 
           <div class="game-scores o-wins">
               <label>o</label>
-              <label>(player 2)</label>
+              <label id="o_player">(player 2)</label>
               <b>0</b>
           </div>
         </div>
