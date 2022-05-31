@@ -13,10 +13,10 @@ const PlayerVsPlayerModule = (function () {
 
   const _turn_figure = document.getElementById("turn_figure");
 
-  let GameBoard = new Array(3);
-  GameBoard[0] = new Array(3);
-  GameBoard[1] = new Array(3);
-  GameBoard[2] = new Array(3);
+  let _GameBoard = new Array(3);
+  _GameBoard[0] = new Array(3);
+  _GameBoard[1] = new Array(3);
+  _GameBoard[2] = new Array(3);
 
   function SetAddEventListeners(){
     for(const cell of _GameBoardCells){
@@ -35,13 +35,13 @@ const PlayerVsPlayerModule = (function () {
   }
   
   function _click(event){
-    _UpdateGameBoard(event,_CurrentTurn);
+    _UpdateGameBoard(event);
     event.target.className = `game-board-cell active ${_CurrentTurn}`;
     event.target.removeEventListener("mouseover",_mouseover);
     event.target.removeEventListener("mouseout",_mouseleave);
     event.target.removeEventListener("click",_click);
     _CurrentTurn === "x" ? _CurrentTurn = "o" :  _CurrentTurn = "x";
-    _ChangeTurn(_CurrentTurn);
+    _ChangeTurn();
   }
 
   function ChangePlayerLabel(){
@@ -54,7 +54,7 @@ const PlayerVsPlayerModule = (function () {
     _X_Player.innerText = "(player 2)";
   }
 
-  function _ChangeTurn(_CurrentTurn){
+  function _ChangeTurn(){
     if(_CurrentTurn === "o"){
       _turn_figure.setAttribute("src","./images/icons/icon-o-grey.svg");
       return;
@@ -62,11 +62,108 @@ const PlayerVsPlayerModule = (function () {
     _turn_figure.setAttribute("src","./images/icons/icon-x-grey.svg");
   }
 
-  function _UpdateGameBoard(event,_CurrentTurn){
+  function _UpdateGameBoard(event){
     let currentPosition = event.target.id; 
-    let FirstPosition = parseInt(currentPosition.slice(0,1));
-    let SecondPosition = parseInt(currentPosition.slice(1,2));
-    GameBoard[FirstPosition][SecondPosition] = _CurrentTurn;
+    let Row = parseInt(currentPosition.slice(0,1));
+    let Column = parseInt(currentPosition.slice(1,2));
+    _GameBoard[Row][Column] = _CurrentTurn;
+    _EvaluateGame(Row,Column);
+  }
+
+  function _EvaluateGame(Row,Column){
+    let obj ={
+      _CheckLeftDiagonal:_CheckLeftDiagonal(Row,Column),
+      _CheckRightDiagonal:_CheckRightDiagonal(Row,Column),
+      _CheckHorizontal:_CheckHorizontal(Row,Column),
+      _CheckVertical:_CheckVertical(Row,Column),
+    }
+    /*
+    _CheckLeftDiagonal(Row,Column);
+    _CheckRightDiagonal(Row,Column);
+    _CheckHorizontal(Row,Column);
+    _CheckVertical(Row,Column);*/
+  }
+
+  function _CheckLeftDiagonal(Row,Column){
+    let CombinationLeftDiagonal = "";
+    while(_IsIndexValid(Row,Column)){
+      /*Left Diagonal*/
+      Row -= 1;
+      Column -= 1;
+    }
+
+    /*Left Diagonal*/
+    Row += 1;
+    Column += 1;
+
+    while(_IsIndexValid(Row,Column)){
+      CombinationLeftDiagonal += _GameBoard[Row][Column];
+      Row += 1;
+      Column += 1;
+    }
+    if(CombinationLeftDiagonal === "xxx" || CombinationLeftDiagonal === "ooo") return true;
+    CombinationLeftDiagonal = "";
+  }
+
+  function _CheckRightDiagonal(Row,Column){
+    let CombinationRightDiagonal = "";
+    while(_IsIndexValid(Row,Column)){
+      /*Right Diagonal*/
+      Row -= 1;
+      Column += 1;
+    }
+
+    /*Right Diagonal*/
+    Row += 1;
+    Column -= 1;
+
+    while(_IsIndexValid(Row,Column)){
+      CombinationRightDiagonal += _GameBoard[Row][Column];
+      Row += 1;
+      Column -= 1;
+    }
+    if(CombinationLeftDiagonal === "xxx" || CombinationLeftDiagonal === "ooo") return true;
+    CombinationRightDiagonal = "";
+  }
+
+  function _CheckHorizontal(Row,Column){
+    let HorizontalCombination = "";
+    while(_IsIndexValid(Row,Column)){
+      /*Horizontal Combination*/
+      Row -= 1;
+    }
+
+    /*Horizontal Combination*/
+    Row += 1;
+
+    while(_IsIndexValid(Row,Column)){
+      HorizontalCombination += _GameBoard[Row][Column];
+      Row += 1;
+    }
+    console.log(HorizontalCombination);
+    HorizontalCombination = "";
+  }
+
+  function _CheckVertical(Row,Column){
+    let VerticalCombination = "";
+    while(_IsIndexValid(Row,Column)){
+      /*Horizontal Combination*/
+      Column -= 1;
+    }
+
+    /*Horizontal Combination*/
+    Column += 1;
+
+    while(_IsIndexValid(Row,Column)){
+      VerticalCombination += _GameBoard[Row][Column];
+      Column += 1;
+    }
+    console.log(VerticalCombination);
+    VerticalCombination = "";
+  }
+
+  function _IsIndexValid(Row,Column){
+    if((Row >= 0 && Row <= 2) && (Column >= 0 && Column <= 2)) return true;
   }
 
 
