@@ -1,28 +1,22 @@
-const PlayerVsPlayerModule = (function () {
-  'use strict';
+// factory function for repeating objects
+const People = function(name, marker) {
+  return {name, marker}
+}
 
-  let _CurrentTurn = "x";
-
-  let _Player1Choice = localStorage.getItem("Player1Mark")
-
-  const _GameBoardCells = document.getElementsByClassName("game-board-cell");
-
-  const _X_Player = document.getElementById("x_player");
-
-  const _O_Player = document.getElementById("o_player");
-
-  const _turn_figure = document.getElementById("turn_figure");
-
+const GameBoard = (function(){
   let _GameBoard = new Array(3);
   _GameBoard[0] = new Array(3);
   _GameBoard[1] = new Array(3);
   _GameBoard[2] = new Array(3);
 
+  const _GAMEBOARDCELLS = document.getElementsByClassName("game-board-cell");
+  const _TURN_FIGURE = document.getElementById("turn_figure");
+  let _CurrentTurn = "x";
   let _Combination = "";
   let _IdsWinningSquares = ""; 
 
   function SetAddEventListeners(){
-    for(const cell of _GameBoardCells){
+    for(const cell of _GAMEBOARDCELLS){
       cell.addEventListener("mouseover",_mouseover);
       cell.addEventListener("mouseout",_mouseleave);
       cell.addEventListener("click",_click);
@@ -49,22 +43,12 @@ const PlayerVsPlayerModule = (function () {
     _ChangeTurn();
   }
 
-  function ChangePlayerLabel(){
-    if(_Player1Choice === "x"){
-      _X_Player.innerText = "(player 1)";
-      _O_Player.innerText = "(player 2)";
-      return;
-    }
-    _O_Player.innerText = "(player 1)";
-    _X_Player.innerText = "(player 2)";
-  }
-
   function _ChangeTurn(){
     if(_CurrentTurn === "o"){
-      _turn_figure.setAttribute("src","./images/icons/icon-o-grey.svg");
+      _TURN_FIGURE.setAttribute("src","./images/icons/icon-o-grey.svg");
       return;
     }
-    _turn_figure.setAttribute("src","./images/icons/icon-x-grey.svg");
+    _TURN_FIGURE.setAttribute("src","./images/icons/icon-x-grey.svg");   
   }
 
   function _UpdateGameBoard(event){
@@ -80,7 +64,10 @@ const PlayerVsPlayerModule = (function () {
     _CheckRightDiagonal(Row,Column);
     _CheckHorizontal(Row,Column);
     _CheckVertical(Row,Column);
-    if(_Combination === "xxx" || _Combination === "ooo") TruncateGame();
+    if(_Combination === "xxx" || _Combination === "ooo") {
+      GameController.TruncateGame(_GAMEBOARDCELLS);
+      ColorWinningSquares();
+    }
   }
 
   function _CheckLeftDiagonal(Row,Column){
@@ -172,17 +159,6 @@ const PlayerVsPlayerModule = (function () {
     if((Row >= 0 && Row <= 2) && (Column >= 0 && Column <= 2)) return true;
   }
 
-  function TruncateGame(){
-    /*1-) Va a parar el juego*/
-    for(const element of _GameBoardCells){
-      element.removeEventListener("mouseover",_mouseover);
-      element.removeEventListener("mouseout",_mouseleave);
-      element.removeEventListener("click",_click);
-      element.style.cursor =  "default";
-    }
-    ColorWinningSquares();
-  }
-
   function ColorWinningSquares(){
     let FirstCell = document.getElementById(_IdsWinningSquares.slice(0,2));
     let SecondCell = document.getElementById(_IdsWinningSquares.slice(2,4)); 
@@ -196,11 +172,25 @@ const PlayerVsPlayerModule = (function () {
     }
     FirstCell.className += " match_x";
     SecondCell.className += " match_x";
-    ThirdCell.className += " match_x";
-    
+    ThirdCell.className += " match_x"; 
   }
-  return {SetAddEventListeners,ChangePlayerLabel};
-})();
+  return {SetAddEventListeners,_mouseleave,_mouseover,_click};
+}())
 
-PlayerVsPlayerModule.SetAddEventListeners();
-PlayerVsPlayerModule.ChangePlayerLabel();
+const PlayerController = (function(){
+}())
+
+const GameController = (function(){
+  function TruncateGame(_GameBoardCells){
+    /*1-) Va a parar el juego*/
+    for(const element of _GameBoardCells){
+      element.removeEventListener("mouseover",GameBoard._mouseover);
+      element.removeEventListener("mouseout",GameBoard._mouseleave);
+      element.removeEventListener("click",GameBoard._click);
+      element.style.cursor =  "default";
+    }
+  }
+  return{TruncateGame};
+}());
+
+GameBoard.SetAddEventListeners();
