@@ -212,4 +212,12 @@ button{
   color: #1f3641;
 }
 
+.game-board-cell.active.o.match_o{
+  background: url(/images/icons/icon-o-black.svg) no-repeat 50% #f2b137;
+  box-shadow: inset 0 -4px 0 #cc8b13;
+}
 
+.game-board-cell.x.match_x{
+  background: url(/images/icons/icon-x-black.svg) no-repeat 50% #31c3bd;
+  box-shadow: inset 0 -4px 0 #118c87;
+}

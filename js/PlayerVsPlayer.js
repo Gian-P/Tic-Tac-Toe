@@ -18,6 +18,9 @@ const PlayerVsPlayerModule = (function () {
   _GameBoard[1] = new Array(3);
   _GameBoard[2] = new Array(3);
 
+  let _Combination = "";
+  let _IdsWinningSquares = ""; 
+
   function SetAddEventListeners(){
     for(const cell of _GameBoardCells){
       cell.addEventListener("mouseover",_mouseover);
@@ -35,8 +38,10 @@ const PlayerVsPlayerModule = (function () {
   }
   
   function _click(event){
-    _UpdateGameBoard(event);
+    _Combination = "";
+    _IdsWinningSquares = "";
     event.target.className = `game-board-cell active ${_CurrentTurn}`;
+    _UpdateGameBoard(event);
     event.target.removeEventListener("mouseover",_mouseover);
     event.target.removeEventListener("mouseout",_mouseleave);
     event.target.removeEventListener("click",_click);
@@ -71,21 +76,18 @@ const PlayerVsPlayerModule = (function () {
   }
 
   function _EvaluateGame(Row,Column){
-    let obj ={
-      _CheckLeftDiagonal:_CheckLeftDiagonal(Row,Column),
-      _CheckRightDiagonal:_CheckRightDiagonal(Row,Column),
-      _CheckHorizontal:_CheckHorizontal(Row,Column),
-      _CheckVertical:_CheckVertical(Row,Column),
-    }
-    /*
     _CheckLeftDiagonal(Row,Column);
     _CheckRightDiagonal(Row,Column);
     _CheckHorizontal(Row,Column);
-    _CheckVertical(Row,Column);*/
+    _CheckVertical(Row,Column);
+    if(_Combination === "xxx" || _Combination === "ooo") TruncateGame();
   }
 
   function _CheckLeftDiagonal(Row,Column){
-    let CombinationLeftDiagonal = "";
+    if(_Combination === "xxx" || _Combination === "ooo") return;
+    _Combination = "";
+    _IdsWinningSquares = "";
+
     while(_IsIndexValid(Row,Column)){
       /*Left Diagonal*/
       Row -= 1;
@@ -97,16 +99,18 @@ const PlayerVsPlayerModule = (function () {
     Column += 1;
 
     while(_IsIndexValid(Row,Column)){
-      CombinationLeftDiagonal += _GameBoard[Row][Column];
+      _Combination += _GameBoard[Row][Column];
+      _IdsWinningSquares += String(Row).concat(String(Column));
       Row += 1;
       Column += 1;
     }
-    if(CombinationLeftDiagonal === "xxx" || CombinationLeftDiagonal === "ooo") return true;
-    CombinationLeftDiagonal = "";
   }
 
   function _CheckRightDiagonal(Row,Column){
-    let CombinationRightDiagonal = "";
+    if(_Combination === "xxx" || _Combination === "ooo") return;
+    _Combination = "";
+    _IdsWinningSquares = "";
+
     while(_IsIndexValid(Row,Column)){
       /*Right Diagonal*/
       Row -= 1;
@@ -118,55 +122,83 @@ const PlayerVsPlayerModule = (function () {
     Column -= 1;
 
     while(_IsIndexValid(Row,Column)){
-      CombinationRightDiagonal += _GameBoard[Row][Column];
+      _Combination += _GameBoard[Row][Column];
+      _IdsWinningSquares += String(Row).concat(String(Column));
       Row += 1;
       Column -= 1;
     }
-    if(CombinationLeftDiagonal === "xxx" || CombinationLeftDiagonal === "ooo") return true;
-    CombinationRightDiagonal = "";
   }
 
   function _CheckHorizontal(Row,Column){
-    let HorizontalCombination = "";
+    if(_Combination === "xxx" || _Combination === "ooo") return;
+    _Combination = "";
+    _IdsWinningSquares = "";
+
     while(_IsIndexValid(Row,Column)){
       /*Horizontal Combination*/
       Row -= 1;
     }
-
     /*Horizontal Combination*/
     Row += 1;
 
     while(_IsIndexValid(Row,Column)){
-      HorizontalCombination += _GameBoard[Row][Column];
+      _Combination += _GameBoard[Row][Column];
+      _IdsWinningSquares += String(Row).concat(String(Column));
       Row += 1;
     }
-    console.log(HorizontalCombination);
-    HorizontalCombination = "";
   }
 
   function _CheckVertical(Row,Column){
-    let VerticalCombination = "";
+    if(_Combination === "xxx" || _Combination === "ooo") return;
+    _Combination = "";
+    _IdsWinningSquares = "";
+
     while(_IsIndexValid(Row,Column)){
-      /*Horizontal Combination*/
+      /*Vertical Combination*/
       Column -= 1;
     }
 
-    /*Horizontal Combination*/
+    /*Vertical Combination*/
     Column += 1;
 
     while(_IsIndexValid(Row,Column)){
-      VerticalCombination += _GameBoard[Row][Column];
+      _Combination += _GameBoard[Row][Column];
+      _IdsWinningSquares += String(Row).concat(String(Column));
       Column += 1;
     }
-    console.log(VerticalCombination);
-    VerticalCombination = "";
   }
 
   function _IsIndexValid(Row,Column){
     if((Row >= 0 && Row <= 2) && (Column >= 0 && Column <= 2)) return true;
   }
 
+  function TruncateGame(){
+    /*1-) Va a parar el juego*/
+    for(const element of _GameBoardCells){
+      element.removeEventListener("mouseover",_mouseover);
+      element.removeEventListener("mouseout",_mouseleave);
+      element.removeEventListener("click",_click);
+      element.style.cursor =  "default";
+    }
+    ColorWinningSquares();
+  }
 
+  function ColorWinningSquares(){
+    let FirstCell = document.getElementById(_IdsWinningSquares.slice(0,2));
+    let SecondCell = document.getElementById(_IdsWinningSquares.slice(2,4)); 
+    let ThirdCell = document.getElementById(_IdsWinningSquares.slice(4,6));
+    
+    if(_Combination === "ooo"){
+      FirstCell.className += " match_o";
+      SecondCell.className += " match_o";
+      ThirdCell.className += " match_o";
+      return;
+    }
+    FirstCell.className += " match_x";
+    SecondCell.className += " match_x";
+    ThirdCell.className += " match_x";
+    
+  }
   return {SetAddEventListeners,ChangePlayerLabel};
 })();
 
