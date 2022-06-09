@@ -4,7 +4,9 @@ const IndexModule = (function(){
   const _MARK_CHOICE_CONTAINER = document.getElementById("mark_choice_container");
   const _PLAYERS_CHOICE_X = document.getElementById("player's_choice_x");
   const _PLAYERS_CHOICE_O = document.getElementById("player's_choice_o");
-  const _BUTTON_GREEN = document.getElementById("button_green");modal
+  const _BUTTON_GREEN = document.getElementById("button_green");
+  const _BUTTON_MODAL = document.getElementById("button_modal");
+  const _FORMPLAYERVSPLAYER = document.getElementById("formPlayerVsPlayer");
   const _MODAL = document.getElementById("modal");
   const _PATHS = document.getElementsByTagName("path");
   const _ESTILOS = document.styleSheets;
@@ -38,16 +40,24 @@ const IndexModule = (function(){
     _PATHS[1].setAttribute("fill","#1F3641");
   }
 
-  function _LoadPlayerVsPlayer(){
+  function _SaveMark(){
     localStorage.setItem("Player1Mark",_MARK_CHOICE_CONTAINER.className.charAt(13));
-    location.href = "PlayerVsPlayer.html";
+    setTimeout(() => _FORMPLAYERVSPLAYER.submit(), 1000);
+  }
+
+  function _LoadCartel(){
+    _MODAL.className += " active";
   }
 
   function SetAddEventListeners(){
     _PLAYERS_CHOICE_X.addEventListener("click",_ChangePlayer1Mark); 
     _PLAYERS_CHOICE_O.addEventListener("click",_ChangePlayer1Mark);
-    _BUTTON_GREEN.addEventListener("click",_LoadPlayerVsPlayer);
-    _MODAL.addEventListener("click",)
+    _BUTTON_GREEN.addEventListener("click",_LoadCartel);
+    _BUTTON_MODAL.addEventListener("click",_SaveMark);
+  }
+
+  _FORMPLAYERVSPLAYER.onsubmit=function(e){
+    e.preventDefault();
   }
   return {SetAddEventListeners};
 })();
