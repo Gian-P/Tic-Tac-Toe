@@ -7,6 +7,7 @@
 
   <script src="./js/index.js" defer></script>
   <link rel="stylesheet" href="./css/index.css" id="estilos">
+  <link rel="stylesheet" href="./css/PlayerVsPlayer.css" id="estilos">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@700&display=swap" rel="stylesheet">  
@@ -16,9 +17,7 @@
 <body>
   <main>
     <div class="container">
-
       <div class="game-menu">
-  
         <div class="game-menu-header">
           <img src="./images/icons/icon-x-bright-green.svg" alt="">
           <img src="./images/icons/icon-o-bright-yellow.svg" alt="">
@@ -43,21 +42,28 @@
         </div>
 
         <div class="game-menu-cta">
-
           <button class="button-orange large" id="button-orange">
             <i>NEW GAME (VS CPU)</i>
           </button>    
-
             <button class="button-green large" id="button_green">
               <i>NEW GAME (VS PLAYER)</i>
             </button>  
-
         </div>
-
-        <div class="modal">
-
+        <div class="modal" id="modal">
+          <div class="modal_content">
+            <form action="">
+              <p class="player-1-input">
+                <label>Player 1</label>
+                <input type="text" name="" id="" placeholder="Name">
+              </p>
+              <p class="player-2-input">
+                <label>Player 2</label>
+                <input type="text" name="" id="" placeholder="Name">
+              </p>
+              <button type="submit">Continue</button>
+            </form>
+          </div>
         </div>
-
       </div>  
     </div>
   </main>

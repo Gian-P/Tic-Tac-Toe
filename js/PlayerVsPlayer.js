@@ -4,19 +4,42 @@ const People = function(name, marker) {
 }
 
 const GameBoard = (function(){
-  let _GameBoard = new Array(3);
-  _GameBoard[0] = new Array(3);
-  _GameBoard[1] = new Array(3);
-  _GameBoard[2] = new Array(3);
+  let GameBoard = new Array(3);
+  GameBoard[0] = new Array(3);
+  GameBoard[1] = new Array(3);
+  GameBoard[2] = new Array(3);
 
-  const _GAMEBOARDCELLS = document.getElementsByClassName("game-board-cell");
+  const GAMEBOARDCELLS = document.getElementsByClassName("game-board-cell");
   const _TURN_FIGURE = document.getElementById("turn_figure");
+  const _PLAYER_1_COUNTER = document.getElementById("_PLAYER_1_COUNTER");
+  const _PLAYER_2_COUNTER = document.getElementById("_PLAYER_2_COUNTER");
+  const TIE = document.getElementById("Tie");
+  const MODAL = document.getElementById("modal");
+  const IMG_CARTEL = document.getElementById("img_cartel");
+  const MESSAGE_CARTEL = document.getElementById("message_cartel");
+  const MESSAGE_DECLARATION = document.getElementById("message_declaration");
+  const GREY_MEDIUM = document.getElementById("grey_medium");
+  const ORANGE_MEDIUM = document.getElementById("orange_medium");
+  const RIGHT_SIDE_BUTTON = document.getElementById("right_side_button");
+  GREY_MEDIUM.addEventListener("click",function _f1(event){
+    GameController.RestartGame(GAMEBOARDCELLS,GameBoard,MODAL,event);
+  });
+  ORANGE_MEDIUM.addEventListener("click",function _f2(event){
+    GameController.RestartGame(GAMEBOARDCELLS,GameBoard,MODAL,event);
+  });
+  RIGHT_SIDE_BUTTON.addEventListener("click",function _f3(event){
+    GameController.LoadRestartMessage(MODAL,MESSAGE_CARTEL,MESSAGE_DECLARATION,GREY_MEDIUM,ORANGE_MEDIUM,event);
+  });
+
+  MODAL.addEventListener("click",_RemoveMessage);
   let _CurrentTurn = "x";
   let _Combination = "";
   let _IdsWinningSquares = ""; 
 
   function SetAddEventListeners(){
-    for(const cell of _GAMEBOARDCELLS){
+    _CurrentTurn = "x";
+    _TURN_FIGURE.setAttribute("src",`./images/icons/icon-${_CurrentTurn}-grey.svg`);
+    for(const cell of GAMEBOARDCELLS){
       cell.addEventListener("mouseover",_mouseover);
       cell.addEventListener("mouseout",_mouseleave);
       cell.addEventListener("click",_click);
@@ -39,23 +62,19 @@ const GameBoard = (function(){
     event.target.removeEventListener("mouseover",_mouseover);
     event.target.removeEventListener("mouseout",_mouseleave);
     event.target.removeEventListener("click",_click);
-    _CurrentTurn === "x" ? _CurrentTurn = "o" :  _CurrentTurn = "x";
     _ChangeTurn();
   }
 
   function _ChangeTurn(){
-    if(_CurrentTurn === "o"){
-      _TURN_FIGURE.setAttribute("src","./images/icons/icon-o-grey.svg");
-      return;
-    }
-    _TURN_FIGURE.setAttribute("src","./images/icons/icon-x-grey.svg");   
+    _CurrentTurn === "x" ? _CurrentTurn = "o" :  _CurrentTurn = "x";
+    _TURN_FIGURE.setAttribute("src",`./images/icons/icon-${_CurrentTurn}-grey.svg`);
   }
 
   function _UpdateGameBoard(event){
     let currentPosition = event.target.id; 
     let Row = parseInt(currentPosition.slice(0,1));
     let Column = parseInt(currentPosition.slice(1,2));
-    _GameBoard[Row][Column] = _CurrentTurn;
+    GameBoard[Row][Column] = _CurrentTurn;
     _EvaluateGame(Row,Column);
   }
 
@@ -65,8 +84,12 @@ const GameBoard = (function(){
     _CheckHorizontal(Row,Column);
     _CheckVertical(Row,Column);
     if(_Combination === "xxx" || _Combination === "ooo") {
-      GameController.TruncateGame(_GAMEBOARDCELLS);
-      ColorWinningSquares();
+      GameController.TruncateGame(GAMEBOARDCELLS,_mouseover,_mouseleave,_click);
+      _ColorWinningSquares(_Combination.slice(0,1));
+      return _UpdateScore();
+    }
+    if(!_CheckTie(GameBoard)){
+      _UpdateScore("tie");
     }
   }
 
@@ -86,7 +109,7 @@ const GameBoard = (function(){
     Column += 1;
 
     while(_IsIndexValid(Row,Column)){
-      _Combination += _GameBoard[Row][Column];
+      _Combination += GameBoard[Row][Column];
       _IdsWinningSquares += String(Row).concat(String(Column));
       Row += 1;
       Column += 1;
@@ -109,7 +132,7 @@ const GameBoard = (function(){
     Column -= 1;
 
     while(_IsIndexValid(Row,Column)){
-      _Combination += _GameBoard[Row][Column];
+      _Combination += GameBoard[Row][Column];
       _IdsWinningSquares += String(Row).concat(String(Column));
       Row += 1;
       Column -= 1;
@@ -129,7 +152,7 @@ const GameBoard = (function(){
     Row += 1;
 
     while(_IsIndexValid(Row,Column)){
-      _Combination += _GameBoard[Row][Column];
+      _Combination += GameBoard[Row][Column];
       _IdsWinningSquares += String(Row).concat(String(Column));
       Row += 1;
     }
@@ -149,7 +172,7 @@ const GameBoard = (function(){
     Column += 1;
 
     while(_IsIndexValid(Row,Column)){
-      _Combination += _GameBoard[Row][Column];
+      _Combination += GameBoard[Row][Column];
       _IdsWinningSquares += String(Row).concat(String(Column));
       Column += 1;
     }
@@ -159,38 +182,100 @@ const GameBoard = (function(){
     if((Row >= 0 && Row <= 2) && (Column >= 0 && Column <= 2)) return true;
   }
 
-  function ColorWinningSquares(){
+  function _ColorWinningSquares(winner){
     let FirstCell = document.getElementById(_IdsWinningSquares.slice(0,2));
     let SecondCell = document.getElementById(_IdsWinningSquares.slice(2,4)); 
     let ThirdCell = document.getElementById(_IdsWinningSquares.slice(4,6));
-    
-    if(_Combination === "ooo"){
-      FirstCell.className += " match_o";
-      SecondCell.className += " match_o";
-      ThirdCell.className += " match_o";
-      return;
-    }
-    FirstCell.className += " match_x";
-    SecondCell.className += " match_x";
-    ThirdCell.className += " match_x"; 
+    FirstCell.className += ` match_${winner}`;
+    SecondCell.className += ` match_${winner}`;
+    ThirdCell.className += ` match_${winner}`;
   }
-  return {SetAddEventListeners,_mouseleave,_mouseover,_click};
-}())
+  
+  function _UpdateScore(){
+    if(_Combination === "xxx"){
+      _PLAYER_1_COUNTER.innerText === "0" ? _PLAYER_1_COUNTER.innerText = 1 : _PLAYER_1_COUNTER.innerText = parseInt(_PLAYER_1_COUNTER.innerText) + 1;
+      return _LoadWinningMessage("x","green","YOU WON!","message");
+    }
 
-const PlayerController = (function(){
+    if(_Combination === "ooo"){
+      _PLAYER_2_COUNTER.innerText === "0" ? _PLAYER_2_COUNTER.innerText = 1 : _PLAYER_2_COUNTER.innerText =  parseInt(_PLAYER_2_COUNTER.innerText) + 1;
+      return _LoadWinningMessage("o","yellow","YOU WON!","message");
+    }
+    TIE.innerText === "0" ? TIE.innerText = 1 : TIE.innerText =  parseInt(TIE.innerText) + 1;   
+    _LoadWinningMessage("message_cartel","","IT'S A TIE!","message_paragraph");
+  }
+
+  function _CheckTie(GameBoard){
+    for(item of GameBoard){
+      for(element of item){
+        if(element === undefined) return true;
+      }
+    }
+  }
+  
+  function _LoadWinningMessage(winner,color,message,MessageDeclarationClass){
+    MODAL.className += " active";
+    MESSAGE_CARTEL.className = winner;
+    MESSAGE_DECLARATION.innerText = message;
+    MESSAGE_DECLARATION.className = MessageDeclarationClass;
+    GREY_MEDIUM.innerText = "QUIT";
+    ORANGE_MEDIUM.innerText = "NEXT ROUND";
+    if(color) IMG_CARTEL.setAttribute("src",`./images/icons/icon-${winner}-bright-${color}.svg`);  
+  }
+
+  function _RemoveMessage(){
+    MODAL.className = "modal";
+  }
+
+  return {SetAddEventListeners};
 }())
 
 const GameController = (function(){
-  function TruncateGame(_GameBoardCells){
-    /*1-) Va a parar el juego*/
-    for(const element of _GameBoardCells){
-      element.removeEventListener("mouseover",GameBoard._mouseover);
-      element.removeEventListener("mouseout",GameBoard._mouseleave);
-      element.removeEventListener("click",GameBoard._click);
+
+  function TruncateGame(GameBoardCells,_mouseover,_mouseleave,_click){
+    for(const element of GameBoardCells){
+      element.removeEventListener("mouseover",_mouseover);
+      element.removeEventListener("mouseout",_mouseleave);
+      element.removeEventListener("click",_click);
       element.style.cursor =  "default";
     }
   }
-  return{TruncateGame};
+
+  function RestartGame(GAMEBOARDCELLS,GameBoardArray,MODAL,event){ 
+    if(event.target.innerText == "NO, CANCEL") {
+      MODAL.className = "modal";
+      return;
+    }
+
+    if(event.target.id === "grey_medium"){  
+      setTimeout(() => location.href = "index.html", 250); 
+      return;
+    }
+    for(cell of GAMEBOARDCELLS){
+      cell.className = "game-board-cell empty";
+    }
+    GameBoardArray.forEach(element => {
+      element[0] = undefined;
+      element[1] = undefined;
+      element[2] = undefined;
+    });
+    GameBoard.SetAddEventListeners();
+  }
+
+  function LoadRestartMessage(MODAL,MESSAGE_CARTEL,MESSAGE_DECLARATION,GREY_MEDIUM,ORANGE_MEDIUM,event){
+
+    MODAL.className += " active";
+    MESSAGE_CARTEL.className = "message_cartel";
+    MESSAGE_DECLARATION.innerText = "RESTART GAME";
+    MESSAGE_DECLARATION.className = "restart_message";
+    GREY_MEDIUM.innerText = "NO, CANCEL";
+    ORANGE_MEDIUM.innerText = "YES, RESTART";
+  }
+  
+  return{TruncateGame,RestartGame,LoadRestartMessage};
 }());
+
+const PlayerController = (function(){
+}())
 
 GameBoard.SetAddEventListeners();

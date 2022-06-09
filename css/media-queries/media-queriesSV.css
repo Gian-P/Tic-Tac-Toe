@@ -1,3 +1,33 @@
+@media (min-width:37.5em){
+  .modal_content #message_declaration {
+    font-size: 4rem;
+  }
+}
+
+@media (max-width:37.5em){
+  .modal_content{
+    height: 22.8rem;
+  }
+
+  .modal_content p {
+    font-size: 1.4rem;
+    line-height: 1.764rem;
+    letter-spacing: .88px;
+    color: var(--clr-primary-400);
+  }
+
+  .modal_content h3 {
+    font-size: 2.4rem;
+    line-height: 3.024rem;
+    letter-spacing: 1.5px;
+    color: var(--clr-primary-700);
+    gap: 0.8rem;
+  }
+
+  .modal_content h3 img {
+    width: 3rem;
+}
+}
 @media (max-width: 32.5em){ /*520px*/
   .grid-container{
     height: 87.5vw;
@@ -19,7 +49,7 @@
     font-size: 1.2rem;
     line-height: 1.512rem;
     letter-spacing: .75px;
-    color: #1f3641;
+    color: var(--clr-primary-200);
   }
 
   .game-scores b{
@@ -27,7 +57,7 @@
     line-height: 2.52rem;
     letter-spacing: 1.25px;
     font-weight: 700;
-    color: #1f3641;
+    color: var(--clr-primary-200);
   }
 }
 
@@ -36,12 +66,12 @@
     font-size: 1.4rem;
     line-height: 1.664rem;
     letter-spacing: .88px;
-    color: #a8bfc9;
+    color: var(--clr-primary-400);
   } 
 
   .center{
     width: 9.6rem;
-    gap: 9px;
+    gap: 0.9rem;
     padding: 0 1rem 0.3rem;
   }
 
@@ -61,11 +91,11 @@
 }
 
 @media (max-width: 21.875em){ /*350px*/
-  .game-board-cell.active.o{
+  .game-board-cell.active.x{
     background-size: 3.3rem;
   }
 
-  .game-board-cell.active.x{
+  .game-board-cell.active.o{
     background-size: 3.3rem;
   }
 }

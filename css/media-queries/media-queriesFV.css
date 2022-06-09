@@ -3,7 +3,15 @@
     font-size: 1.6rem;
     line-height: 2.016rem;
     letter-spacing: 0.1rem;
-    font-weight: 700;
     color: var(--clr-primary-600);
+  }
+}
+
+@media (max-width:37.5em){ /*600px*/
+  .modal_content .player-1-input,.modal_content .player-2-input {
+    font-size: 2rem;
+    line-height: 1.764rem;
+    letter-spacing: .88px;
+    color: var(--clr-primary-300);
   }
 }

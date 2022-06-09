@@ -4,8 +4,8 @@ const IndexModule = (function(){
   const _MARK_CHOICE_CONTAINER = document.getElementById("mark_choice_container");
   const _PLAYERS_CHOICE_X = document.getElementById("player's_choice_x");
   const _PLAYERS_CHOICE_O = document.getElementById("player's_choice_o");
-  const _BUTTON_GREEN = document.getElementById("button_green");
-
+  const _BUTTON_GREEN = document.getElementById("button_green");modal
+  const _MODAL = document.getElementById("modal");
   const _PATHS = document.getElementsByTagName("path");
   const _ESTILOS = document.styleSheets;
   let _Choice = null;
@@ -47,6 +47,7 @@ const IndexModule = (function(){
     _PLAYERS_CHOICE_X.addEventListener("click",_ChangePlayer1Mark); 
     _PLAYERS_CHOICE_O.addEventListener("click",_ChangePlayer1Mark);
     _BUTTON_GREEN.addEventListener("click",_LoadPlayerVsPlayer);
+    _MODAL.addEventListener("click",)
   }
   return {SetAddEventListeners};
 })();

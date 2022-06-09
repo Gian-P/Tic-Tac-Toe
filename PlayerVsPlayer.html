@@ -32,7 +32,7 @@
           </div>
 
           <div class="right-side-container">
-            <button class="right-side-button icon">
+            <button class="right-side-button icon" id="right_side_button">
               <div>
                 <img src="./images/icons/icon-restart.svg" alt="">
               </div>
@@ -60,21 +60,34 @@
           <div class="game-scores x-wins">
               <label>x</label>
               <label id="x_player">(player 1)</label>
-              <b>0</b>
+              <b id="_PLAYER_1_COUNTER">0</b>
           </div>
 
           <div class="game-scores ties">
               <label>TIES</label>
-              <b>0</b>
+              <b id="Tie">0</b>
           </div>
 
           <div class="game-scores o-wins">
               <label>o</label>
               <label id="o_player">(player 2)</label>
-              <b>0</b>
+              <b id="_PLAYER_2_COUNTER">0</b>
           </div>
         </div>
 
+        <div class="modal" id="modal">
+          <div class="modal_content">
+            <p class="message" id="message_declaration">YOU WON!</p>
+            <h3 id="message_cartel">
+              <img src="./images/icons/icon-o-bright-yellow.svg" alt="" id="img_cartel">
+              TAKES THE ROUND
+            </h3>
+            <div class="modal_cta">
+              <i><button class="grey medium" id="grey_medium">QUIT</button></i>
+              <i><button class="orange medium" id="orange_medium">NEXT ROUND</button></i>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </main>

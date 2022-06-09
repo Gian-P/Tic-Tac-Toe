@@ -35,8 +35,8 @@ main{
 }
 
 .center-container{
-  background-color: #1f3641;
-  box-shadow: inset 0 -4px 0 #10212a;
+  background-color: var(--clr-primary-200);
+  box-shadow: inset 0 -4px 0 var(--clr-primary-500);
   border-radius: 1rem;
   transform: translateX(-11px);
 }
@@ -59,7 +59,7 @@ main{
   font-size: 1.6rem;
   line-height: 0;
   letter-spacing: 1px;
-  color: #a8bfc9;
+  color: var(--clr-primary-400);
 }
 
 .right-side-container{
@@ -117,7 +117,7 @@ button{
 .game-board-cell{
   background-color: var(--clr-primary-200);
   border-radius: 1.5rem;
-  box-shadow: inset 0 -8px 0 #10212a;
+  box-shadow: inset 0 -8px 0 var(--clr-primary-500);
   transition: box-shadow .1s ease-out,transform .1s ease-out,max-height .1s ease-out,-webkit-transform .1s ease-out;
 }
 
@@ -134,10 +134,10 @@ button{
   background-size: 30%;
   background-repeat: no-repeat;
   background-position: 50%;
-  background-color: #1f3641;
+  background-color: var(--clr-primary-200);
   transition: background-size .2s ease-out,opacity .2s ease-out;
   border-radius: 15px;
-  box-shadow: inset 0 -8px 0 #10212a;
+  box-shadow: inset 0 -8px 0 var(--clr-primary-500);
   opacity: 0;
 }
 
@@ -200,7 +200,7 @@ button{
   font-size: 1.4rem;
   line-height: 1.764rem;
   letter-spacing: .88px;
-  color: #1f3641;
+  color: var(--clr-primary-200);
   text-transform: uppercase;
 }
 
@@ -209,10 +209,10 @@ button{
   line-height: 3.024rem;
   letter-spacing: 0.15rem;
   font-weight: 700;
-  color: #1f3641;
+  color: var(--clr-primary-200);
 }
 
-.game-board-cell.active.o.match_o{
+.game-board-cell.o.match_o{
   background: url(/images/icons/icon-o-black.svg) no-repeat 50% #f2b137;
   box-shadow: inset 0 -4px 0 #cc8b13;
 }
@@ -220,4 +220,129 @@ button{
 .game-board-cell.x.match_x{
   background: url(/images/icons/icon-x-black.svg) no-repeat 50% #31c3bd;
   box-shadow: inset 0 -4px 0 #118c87;
+}
+
+.modal,.modal_content{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+}
+
+.modal.active{
+  opacity: 1;
+  pointer-events: all;
+}
+
+.modal{
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  cursor: pointer;
+  background-color: rgba(0,0,0,.5);
+  height: 100vh;
+  pointer-events: none;
+  transition: opacity .3s ease-out;
+  will-change: opacity;
+}
+
+.modal_content{
+  flex-direction: column;
+  flex: 1 1;
+  cursor: default;
+  background-color: var(--clr-primary-200);
+  height: 26.6rem;
+  transform: translateY(55vh) skewY(-2deg);
+  transition: opacity .3s ease-out,transform .18s ease-out,-webkit-transform .18s ease-out;
+  transition-delay: 0s;
+  will-change: opacity,transform;
+}
+
+.modal.active .modal_content {
+  opacity: 1;
+  transform: skewY(0deg);
+  transition-delay: .15s;
+}
+
+.modal_content h3, .modal_content p {
+  color: var(--clr-primary-400);
+}
+
+.modal_content p {
+  font-size: 1.6rem;
+  line-height: 2.016rem;
+  letter-spacing: 1px;
+  margin-bottom: 1.6rem;
+}
+
+.modal_content h3.o {
+  color: var(--clr-primary-700);
+}
+
+.modal_content h3.x {
+  color: var(--clr-primary-900);
+}
+
+.modal_content h3 {
+  display: flex;
+  align-items: center;
+  gap: 2.4rem;
+  font-size: 4rem;
+  line-height: 5.04rem;
+  letter-spacing: 2.5px;
+  margin-bottom: 2.3rem;
+}
+
+.modal_content .modal_cta {
+  display: flex;
+  gap: 1.6rem;
+}
+
+button.medium {
+  height: 5.2rem;
+  padding: 0 1.6rem 0.1rem;
+  border-radius: 1rem;
+  font-size: 1.6rem;
+  line-height: 2.016rem;
+  letter-spacing: 1px;
+  color: var(--clr-primary-100);
+  box-shadow: inset 0 -4px 0 var(--clr-neutral-500);
+  width: auto;
+}
+
+button.grey {
+  background: var(--clr-primary-400);
+  box-shadow: inset 0 -4px 0 var(--clr-neutral-500);
+}
+
+button.medium.orange {
+  box-shadow: inset 0 -4px 0 var(--clr-primary-800);
+}
+
+button.orange {
+  background: var(--clr-primary-700);
+  box-shadow: inset 0 -8px 0 var(--clr-primary-800);
+}
+.orange.medium:hover{
+  background-color: var(--clr-neutral-200);
+}
+
+.grey.medium:hover{
+  background-color: var(--clr-neutral-400);
+}
+
+.modal .message_cartel{
+  display: none;
+}
+
+.modal .message_paragraph{
+  font-size: 3.5rem;
+  padding-bottom: 1rem;
+  margin-right: 1rem;
+}
+
+.modal .restart_message{
+  font-size: 2.4rem ;
+  color: var(--clr-primary-700);
+  margin-bottom: 2.3rem;
 }
