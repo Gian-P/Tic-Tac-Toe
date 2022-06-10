@@ -9,6 +9,8 @@ const IndexModule = (function(){
   const _FORMPLAYERVSPLAYER = document.getElementById("formPlayerVsPlayer");
   const _MODAL = document.getElementById("modal");
   const _PATHS = document.getElementsByTagName("path");
+  const _PLAYER_1_INPUT = document.getElementById("input_player_1");
+  const _PLAYER_2_INPUT = document.getElementById("input_player_2");
   const _ESTILOS = document.styleSheets;
   let _Choice = null;
   let _CurrentChoice = null;
@@ -42,18 +44,21 @@ const IndexModule = (function(){
 
   function _SaveMark(){
     localStorage.setItem("Player1Mark",_MARK_CHOICE_CONTAINER.className.charAt(13));
-    setTimeout(() => _FORMPLAYERVSPLAYER.submit(), 1000);
+    localStorage.setItem("player-1-input",_PLAYER_1_INPUT.value);
+    localStorage.setItem("player-2-input",_PLAYER_2_INPUT.value);
+    setTimeout(() => _FORMPLAYERVSPLAYER.submit(), 300);
   }
 
   function _LoadCartel(){
     _MODAL.className += " active";
   }
 
+
   function SetAddEventListeners(){
     _PLAYERS_CHOICE_X.addEventListener("click",_ChangePlayer1Mark); 
     _PLAYERS_CHOICE_O.addEventListener("click",_ChangePlayer1Mark);
     _BUTTON_GREEN.addEventListener("click",_LoadCartel);
-    _BUTTON_MODAL.addEventListener("click",_SaveMark);
+    _BUTTON_MODAL.addEventListener("click",_SaveMark);  
   }
 
   _FORMPLAYERVSPLAYER.onsubmit=function(e){

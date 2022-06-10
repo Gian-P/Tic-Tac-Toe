@@ -312,23 +312,34 @@ button.medium {
 
 button.grey {
   background: var(--clr-primary-400);
-  box-shadow: inset 0 -4px 0 var(--clr-neutral-500);
-}
-
-button.medium.orange {
-  box-shadow: inset 0 -4px 0 var(--clr-primary-800);
+  box-shadow: inset 0 -6px 0 var(--clr-neutral-500);
+  transition: box-shadow .1s ease-out,transform .1s ease-out,-webkit-transform .1s ease-out;
 }
 
 button.orange {
   background: var(--clr-primary-700);
-  box-shadow: inset 0 -8px 0 var(--clr-primary-800);
+  box-shadow: inset 0 -6px 0 var(--clr-primary-800);
+  transition: box-shadow .1s ease-out,transform .1s ease-out,-webkit-transform .1s ease-out;
 }
 .orange.medium:hover{
   background-color: var(--clr-neutral-200);
 }
+.orange.medium:active{
+  top: 4px;
+  box-shadow: inset 0 -3px 0 var(--clr-primary-800);
+  position: relative;
+  transition: box-shadow .1s ease-out,transform .1s ease-out,-webkit-transform .1s ease-out;
+}
 
 .grey.medium:hover{
   background-color: var(--clr-neutral-400);
+}
+
+.grey.medium:active{
+  top: 4px;
+  box-shadow: inset 0 -3px 0 var(--clr-neutral-500);
+  position: relative;
+  transition: box-shadow .1s ease-out,transform .1s ease-out,-webkit-transform .1s ease-out;
 }
 
 .modal .message_cartel{

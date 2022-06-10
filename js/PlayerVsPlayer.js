@@ -224,7 +224,7 @@ const GameBoard = (function(){
   }
 
   function _RemoveMessage(){
-    MODAL.className = "modal";
+    setTimeout(() => MODAL.className = "modal", 300);
   }
 
   return {SetAddEventListeners};
@@ -243,7 +243,7 @@ const GameController = (function(){
 
   function RestartGame(GAMEBOARDCELLS,GameBoardArray,MODAL,event){ 
     if(event.target.innerText == "NO, CANCEL") {
-      MODAL.className = "modal";
+      setTimeout(() => MODAL.className = "modal", 300);
       return;
     }
 
@@ -276,6 +276,26 @@ const GameController = (function(){
 }());
 
 const PlayerController = (function(){
+  function SetPlayersNames(){
+    const _X_PLAYER = document.getElementById("x_player");
+    const _O_PLAYER = document.getElementById("o_player");
+    let Player1Name = localStorage.getItem("player-1-input");
+    let Player2Name = localStorage.getItem("player-2-input");
+    let Player1Mark = localStorage.getItem("Player1Mark");
+    let Player2Mark = "";
+    Player1Mark === "x" ? Player2Mark === "o" : Player2Mark === "x";
+    let player1 = People(Player1Name,Player1Mark);
+    let player2 = People(Player2Name,Player2Mark);
+    if(Player1Mark === "x"){
+      Player1Name === "" ? _X_PLAYER.innerText = "Player 1" : _X_PLAYER.innerText = player1["name"];
+      Player2Name === "" ? _O_PLAYER.innerText = "Player 2" : _O_PLAYER.innerText = player2["name"];
+    }else{
+      Player1Name === "" ? _X_PLAYER.innerText = "Player 1" : _O_PLAYER.innerText = player1["name"];
+      Player2Name === "" ? _O_PLAYER.innerText = "Player 2" : _X_PLAYER.innerText = player2["name"];
+    }
+  }
+  return {SetPlayersNames};
 }())
 
+PlayerController.SetPlayersNames();
 GameBoard.SetAddEventListeners();
