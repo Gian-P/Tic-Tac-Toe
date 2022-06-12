@@ -5,6 +5,7 @@ const IndexModule = (function(){
   const _PLAYERS_CHOICE_X = document.getElementById("player's_choice_x");
   const _PLAYERS_CHOICE_O = document.getElementById("player's_choice_o");
   const _BUTTON_GREEN = document.getElementById("button_green");
+  const _BUTTON_ORANGE = document.getElementById("button_orange");
   const _BUTTON_MODAL = document.getElementById("button_modal");
   const _FORMPLAYERVSPLAYER = document.getElementById("formPlayerVsPlayer");
   const _MODAL = document.getElementById("modal");
@@ -46,19 +47,31 @@ const IndexModule = (function(){
     localStorage.setItem("Player1Mark",_MARK_CHOICE_CONTAINER.className.charAt(13));
     localStorage.setItem("player-1-input",_PLAYER_1_INPUT.value);
     localStorage.setItem("player-2-input",_PLAYER_2_INPUT.value);
+    _LoadGameView();
+  }
+
+  function _LoadGameView(){
     setTimeout(() => _FORMPLAYERVSPLAYER.submit(), 300);
+  }
+
+  function _PrepareCPU(){
+    let player1Mark = _MARK_CHOICE_CONTAINER.className.charAt(13);
+    localStorage.setItem("player1MarkCopy",player1Mark);
+    player1Mark === "x" ? localStorage.setItem("cpu","o") : localStorage.setItem("cpu","x");
+    _LoadGameView();
   }
 
   function _LoadCartel(){
     _MODAL.className += " active";
   }
 
-
   function SetAddEventListeners(){
+     localStorage.clear();
     _PLAYERS_CHOICE_X.addEventListener("click",_ChangePlayer1Mark); 
     _PLAYERS_CHOICE_O.addEventListener("click",_ChangePlayer1Mark);
     _BUTTON_GREEN.addEventListener("click",_LoadCartel);
     _BUTTON_MODAL.addEventListener("click",_SaveMark);  
+    _BUTTON_ORANGE.addEventListener("click",_PrepareCPU);
   }
 
   _FORMPLAYERVSPLAYER.onsubmit=function(e){

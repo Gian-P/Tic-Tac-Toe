@@ -22,14 +22,18 @@ const GameBoard = (function(){
   const ORANGE_MEDIUM = document.getElementById("orange_medium");
   const RIGHT_SIDE_BUTTON = document.getElementById("right_side_button");
   GREY_MEDIUM.addEventListener("click",function _f1(event){
-    GameController.RestartGame(GAMEBOARDCELLS,GameBoard,MODAL,event);
+    GameController.RestartGame(GAMEBOARDCELLS,MODAL,event);
   });
   ORANGE_MEDIUM.addEventListener("click",function _f2(event){
-    GameController.RestartGame(GAMEBOARDCELLS,GameBoard,MODAL,event);
+    GameController.RestartGame(GAMEBOARDCELLS,MODAL,event);
   });
   RIGHT_SIDE_BUTTON.addEventListener("click",function _f3(event){
     GameController.LoadRestartMessage(MODAL,MESSAGE_CARTEL,MESSAGE_DECLARATION,GREY_MEDIUM,ORANGE_MEDIUM,event);
   });
+
+  function _f4(event){
+    BotController.MakeMove(_f4);
+  }
 
   MODAL.addEventListener("click",_RemoveMessage);
   let _CurrentTurn = "x";
@@ -38,12 +42,16 @@ const GameBoard = (function(){
 
   function SetAddEventListeners(){
     _CurrentTurn = "x";
+    let _CpuMark = localStorage.getItem("cpu");
     _TURN_FIGURE.setAttribute("src",`./images/icons/icon-${_CurrentTurn}-grey.svg`);
+    _InitializeGameBoard();
     for(const cell of GAMEBOARDCELLS){
       cell.addEventListener("mouseover",_mouseover);
       cell.addEventListener("mouseout",_mouseleave);
-      cell.addEventListener("click",_click);
+      cell.addEventListener("click",Click);
+      cell.addEventListener("click", _f4);
     }
+    if(_CpuMark === "x") BotController.MakeMove();
   }
 
   function _mouseover(event){
@@ -53,15 +61,18 @@ const GameBoard = (function(){
   function _mouseleave(event){
     event.target.className = "game-board-cell empty";
   }
-  
-  function _click(event){
+  /*cambios*/
+  function Click(event,row,column){
+    let cell = null;
+    event === "ia" ? cell = document.getElementById(String(row) + String(column)) : cell = event.target;
     _Combination = "";
     _IdsWinningSquares = "";
-    event.target.className = `game-board-cell active ${_CurrentTurn}`;
-    _UpdateGameBoard(event);
-    event.target.removeEventListener("mouseover",_mouseover);
-    event.target.removeEventListener("mouseout",_mouseleave);
-    event.target.removeEventListener("click",_click);
+    cell.className = `game-board-cell active ${_CurrentTurn}`;
+    _UpdateGameBoard(cell);
+    cell.removeEventListener("mouseover",_mouseover);
+    cell.removeEventListener("mouseout",_mouseleave);
+    cell.removeEventListener("click",Click);
+    setTimeout(() => cell.removeEventListener("click",_f4), 0);
     _ChangeTurn();
   }
 
@@ -70,12 +81,21 @@ const GameBoard = (function(){
     _TURN_FIGURE.setAttribute("src",`./images/icons/icon-${_CurrentTurn}-grey.svg`);
   }
 
-  function _UpdateGameBoard(event){
-    let currentPosition = event.target.id; 
+  function _UpdateGameBoard(cell /*event*/){
+
+    let currentPosition = cell.id; 
     let Row = parseInt(currentPosition.slice(0,1));
     let Column = parseInt(currentPosition.slice(1,2));
     GameBoard[Row][Column] = _CurrentTurn;
     _EvaluateGame(Row,Column);
+  }
+
+  function _InitializeGameBoard(){
+    for(let row = 0; row < 3; row++){
+      for(let column = 0; column < 3; column++){
+        GameBoard[row][column] = "0";
+      }
+    }
   }
 
   function _EvaluateGame(Row,Column){
@@ -84,7 +104,7 @@ const GameBoard = (function(){
     _CheckHorizontal(Row,Column);
     _CheckVertical(Row,Column);
     if(_Combination === "xxx" || _Combination === "ooo") {
-      GameController.TruncateGame(GAMEBOARDCELLS,_mouseover,_mouseleave,_click);
+      GameController.TruncateGame(GAMEBOARDCELLS,_mouseover,_mouseleave,Click,_f4);
       _ColorWinningSquares(_Combination.slice(0,1));
       return _UpdateScore();
     }
@@ -206,9 +226,9 @@ const GameBoard = (function(){
   }
 
   function _CheckTie(GameBoard){
-    for(item of GameBoard){
-      for(element of item){
-        if(element === undefined) return true;
+    for(let row = 0; row < 3; row++){
+      for(let column = 0; column < 3; column++){
+        if(GameBoard[row][column] === "0") return true;
       }
     }
   }
@@ -227,43 +247,39 @@ const GameBoard = (function(){
     setTimeout(() => MODAL.className = "modal", 300);
   }
 
-  return {SetAddEventListeners};
+  return {SetAddEventListeners,Click,GameBoard};
 }())
 
 const GameController = (function(){
 
-  function TruncateGame(GameBoardCells,_mouseover,_mouseleave,_click){
+  function TruncateGame(GameBoardCells,_mouseover,_mouseleave,Click,_f4){
     for(const element of GameBoardCells){
       element.removeEventListener("mouseover",_mouseover);
       element.removeEventListener("mouseout",_mouseleave);
-      element.removeEventListener("click",_click);
+      element.removeEventListener("click",Click);
+      element.removeEventListener("click",_f4)
       element.style.cursor =  "default";
     }
   }
 
-  function RestartGame(GAMEBOARDCELLS,GameBoardArray,MODAL,event){ 
+  function RestartGame(GAMEBOARDCELLS,MODAL,event){ 
     if(event.target.innerText == "NO, CANCEL") {
       setTimeout(() => MODAL.className = "modal", 300);
       return;
     }
 
     if(event.target.id === "grey_medium"){  
-      setTimeout(() => location.href = "index.html", 250); 
+      setTimeout(() => location.href = "index.html", 300); 
       return;
     }
-    for(cell of GAMEBOARDCELLS){
-      cell.className = "game-board-cell empty";
+
+    for(let i = 0; i < GAMEBOARDCELLS.length; i++){
+      GAMEBOARDCELLS[i].className = "game-board-cell empty";
     }
-    GameBoardArray.forEach(element => {
-      element[0] = undefined;
-      element[1] = undefined;
-      element[2] = undefined;
-    });
     GameBoard.SetAddEventListeners();
   }
 
   function LoadRestartMessage(MODAL,MESSAGE_CARTEL,MESSAGE_DECLARATION,GREY_MEDIUM,ORANGE_MEDIUM,event){
-
     MODAL.className += " active";
     MESSAGE_CARTEL.className = "message_cartel";
     MESSAGE_DECLARATION.innerText = "RESTART GAME";
@@ -281,21 +297,60 @@ const PlayerController = (function(){
     const _O_PLAYER = document.getElementById("o_player");
     let Player1Name = localStorage.getItem("player-1-input");
     let Player2Name = localStorage.getItem("player-2-input");
+    let CpuMark = localStorage.getItem("cpu");
     let Player1Mark = localStorage.getItem("Player1Mark");
     let Player2Mark = "";
     Player1Mark === "x" ? Player2Mark === "o" : Player2Mark === "x";
     let player1 = People(Player1Name,Player1Mark);
     let player2 = People(Player2Name,Player2Mark);
+    let cpu = People("cpu",CpuMark);
     if(Player1Mark === "x"){
       Player1Name === "" ? _X_PLAYER.innerText = "Player 1" : _X_PLAYER.innerText = player1["name"];
       Player2Name === "" ? _O_PLAYER.innerText = "Player 2" : _O_PLAYER.innerText = player2["name"];
-    }else{
+    }
+    else if(Player1Mark === "o"){
       Player1Name === "" ? _X_PLAYER.innerText = "Player 1" : _O_PLAYER.innerText = player1["name"];
       Player2Name === "" ? _O_PLAYER.innerText = "Player 2" : _X_PLAYER.innerText = player2["name"];
+    }
+    else{
+      cpu["marker"] === "x" ? _X_PLAYER.innerText = "CPU" : _X_PLAYER.innerText = "Player 1";
+      cpu["marker"] === "o" ? _O_PLAYER.innerText = "CPU" : _O_PLAYER.innerText = "Player 1";
     }
   }
   return {SetPlayersNames};
 }())
 
+const BotController = (function(){
+  function MakeMove(_f4){
+    let _CpuMark = localStorage.getItem("cpu");
+    if(!_CpuMark) return; 
+    // AI to make its turn
+    let ai = _CpuMark;
+    let bestScore = -Infinity;
+    let move;
+    for(let row = 0; row < 3; row++){
+      for(let column = 0; column < 3; column++){
+        if(GameBoard.GameBoard[row][column] === "0"){
+          GameBoard.GameBoard[row][column] = ai;
+          let score = minimax(GameBoard.GameBoard,0,false);
+          GameBoard.GameBoard[row][column] = "0";
+          if(score > bestScore){
+            bestScore = score;
+            move = {row , column};
+          }
+        }
+      }
+    }
+    GameBoard.GameBoard[move.row][move.column] = ai;
+    GameBoard.Click("ia",move.row,move.column);
+  }
+
+  function minimax(board,depth,isMaximizing){
+    return 1;
+  }
+  return {MakeMove};
+}())
+
 PlayerController.SetPlayersNames();
 GameBoard.SetAddEventListeners();
+
