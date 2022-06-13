@@ -323,8 +323,8 @@ const PlayerController = (function(){
 
 const BotController = (function(){
   let scores = {
-    x: 1,
-    o: -1,
+    x: -1,
+    o: 1,
     tie: 0,
   }
   const winningCombos = [
