@@ -74,6 +74,7 @@ const GameBoard = (function(){
     cell.removeEventListener("click",Click);
     setTimeout(() => cell.removeEventListener("click",_f4), 0);
     _ChangeTurn();
+    
   }
 
   function _ChangeTurn(){
@@ -321,6 +322,48 @@ const PlayerController = (function(){
 }())
 
 const BotController = (function(){
+  let scores = {
+    x: 1,
+    o: -1,
+    tie: 0,
+  }
+  const winningCombos = [
+    [0,1,2],
+    [3,4,5],
+    [6,7,8],
+    [0,3,6],
+    [1,4,7],
+    [2,5,8],
+    [0,4,8],
+    [2,4,6]
+  ]
+
+  function _PlayerHasWon(board){
+    let tie = "tie";
+    let index = 0;
+    let GameBoardArray = Array(9).fill(null);
+
+    for(let row = 0; row < 3; row++){
+      for(let column = 0; column < 3; column++){
+        if(board[row][column] !== "0"){
+          GameBoardArray[index] = board[row][column];
+        }
+        index += 1;
+      }
+    }
+
+    for(const condition of winningCombos){
+      let [a,b,c] = condition;
+      if(GameBoardArray[a] && (GameBoardArray[a] === GameBoardArray[b] && GameBoardArray[a] === GameBoardArray[c])){
+        return GameBoardArray[a];
+      }
+      else if(GameBoardArray[a] === null || GameBoardArray[b] === null || GameBoardArray[c] === null){
+        tie = null;
+      }    
+    }
+    return tie;
+  }
+
   function MakeMove(_f4){
     let _CpuMark = localStorage.getItem("cpu");
     if(!_CpuMark) return; 
@@ -346,7 +389,57 @@ const BotController = (function(){
   }
 
   function minimax(board,depth,isMaximizing){
-    return 1;
+    //checkWinner returns null, tie or the winner
+    //checkWinner is based on GameBoard.GameBoard
+    let result = _PlayerHasWon(board);
+    let _CpuMark = localStorage.getItem("cpu");
+    let player1MarkCopy = localStorage.getItem("player1MarkCopy");
+    //si result es distinto de null quiere decir que es un terminal state con lo cual retorna el score que simboliza el valor de la posicion para esta llamada de minimax
+    if(result !== null){
+      return scores[result];
+    }
+    /*
+    this function is finding the best score for all the posible next turns by the ai player
+    if it is the maximizing player check all the spots find the best posible outcome and return it, but call minmax recursively at the next future move
+     */
+    if(isMaximizing){
+      let bestScore = -Infinity;
+      for(let row = 0; row < 3; row++){
+        for(let column = 0; column < 3; column++){
+          //Is the spot available?
+          if(board[row][column] === "0"){
+            board[row][column] = _CpuMark;
+            let score = minimax(board,depth + 1, false);
+            board[row][column] = "0";
+            if(score > bestScore){
+              bestScore = score;
+            }
+          }
+        }
+      }
+      return bestScore;
+    }
+    /*
+    this function does the same thing as the one above but for the human player
+    The minimizing player wants to find the best score for it which is the lowest score which is the human player
+     */
+    else{
+      let bestScore = Infinity;
+      for(let row = 0; row < 3; row++){
+        for(let column = 0; column < 3; column++){
+          //Is the spot available?
+          if(board[row][column] === "0"){
+            board[row][column] = player1MarkCopy;
+            let score = minimax(board,depth + 1, true);
+            board[row][column] = "0";
+            if(score < bestScore){
+              bestScore = score;
+            }
+          }
+        }
+      }
+      return bestScore;
+    } 
   }
   return {MakeMove};
 }())
