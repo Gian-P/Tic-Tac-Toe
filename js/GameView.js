@@ -68,27 +68,27 @@ const GameBoard = (function(){
     _Combination = "";
     _IdsWinningSquares = "";
     cell.className = `game-board-cell active ${_CurrentTurn}`;
-    _UpdateGameBoard(cell);
+    _UpdateGameBoard(cell,event);
     cell.removeEventListener("mouseover",_mouseover);
     cell.removeEventListener("mouseout",_mouseleave);
     cell.removeEventListener("click",Click);
     setTimeout(() => cell.removeEventListener("click",_f4), 0);
     _ChangeTurn();
-    
   }
 
   function _ChangeTurn(){
     _CurrentTurn === "x" ? _CurrentTurn = "o" :  _CurrentTurn = "x";
+    console.log("hola");
     _TURN_FIGURE.setAttribute("src",`./images/icons/icon-${_CurrentTurn}-grey.svg`);
   }
 
-  function _UpdateGameBoard(cell /*event*/){
+  function _UpdateGameBoard(cell /*event*/,event ){
 
     let currentPosition = cell.id; 
     let Row = parseInt(currentPosition.slice(0,1));
     let Column = parseInt(currentPosition.slice(1,2));
     GameBoard[Row][Column] = _CurrentTurn;
-    _EvaluateGame(Row,Column);
+    _EvaluateGame(Row,Column,event);
   }
 
   function _InitializeGameBoard(){
@@ -99,7 +99,7 @@ const GameBoard = (function(){
     }
   }
 
-  function _EvaluateGame(Row,Column){
+  function _EvaluateGame(Row,Column,event){
     _CheckLeftDiagonal(Row,Column);
     _CheckRightDiagonal(Row,Column);
     _CheckHorizontal(Row,Column);
@@ -107,10 +107,10 @@ const GameBoard = (function(){
     if(_Combination === "xxx" || _Combination === "ooo") {
       GameController.TruncateGame(GAMEBOARDCELLS,_mouseover,_mouseleave,Click,_f4);
       _ColorWinningSquares(_Combination.slice(0,1));
-      return _UpdateScore();
+      return _UpdateScore(event);
     }
     if(!_CheckTie(GameBoard)){
-      _UpdateScore("tie");
+      _UpdateScore(event);
     }
   }
 
@@ -212,14 +212,17 @@ const GameBoard = (function(){
     ThirdCell.className += ` match_${winner}`;
   }
   
-  function _UpdateScore(){
+  function _UpdateScore(event){
+    let _CpuMark = localStorage.getItem("cpu");
     if(_Combination === "xxx"){
       _PLAYER_1_COUNTER.innerText === "0" ? _PLAYER_1_COUNTER.innerText = 1 : _PLAYER_1_COUNTER.innerText = parseInt(_PLAYER_1_COUNTER.innerText) + 1;
+      if(event === "ia" && _CpuMark === "x") return _LoadWinningMessage("x","green","AI HAS WON!","message");
       return _LoadWinningMessage("x","green","YOU WON!","message");
     }
 
     if(_Combination === "ooo"){
       _PLAYER_2_COUNTER.innerText === "0" ? _PLAYER_2_COUNTER.innerText = 1 : _PLAYER_2_COUNTER.innerText =  parseInt(_PLAYER_2_COUNTER.innerText) + 1;
+      if(event === "ia" && _CpuMark === "o") return _LoadWinningMessage("o","yellow","AI HAS WON!","message");
       return _LoadWinningMessage("o","yellow","YOU WON!","message");
     }
     TIE.innerText === "0" ? TIE.innerText = 1 : TIE.innerText =  parseInt(TIE.innerText) + 1;   
@@ -241,7 +244,7 @@ const GameBoard = (function(){
     MESSAGE_DECLARATION.className = MessageDeclarationClass;
     GREY_MEDIUM.innerText = "QUIT";
     ORANGE_MEDIUM.innerText = "NEXT ROUND";
-    if(color) IMG_CARTEL.setAttribute("src",`./images/icons/icon-${winner}-bright-${color}.svg`);  
+    if(color) IMG_CARTEL.setAttribute("src",`./images/icons/icon-${winner}-bright-${color}.svg`);
   }
 
   function _RemoveMessage(){
@@ -322,11 +325,20 @@ const PlayerController = (function(){
 }())
 
 const BotController = (function(){
+  let _CpuMark = localStorage.getItem("cpu");
   let scores = {
-    x: -1,
-    o: 1,
+    x: 0,
+    o: 0,
     tie: 0,
   }
+  if(_CpuMark === "o"){
+    scores["x"] = -1;
+    scores["o"] = 1;
+  }else{
+    scores["x"] = 1;
+    scores["o"] = -1;
+  }
+
   const winningCombos = [
     [0,1,2],
     [3,4,5],
@@ -371,16 +383,19 @@ const BotController = (function(){
     let ai = _CpuMark;
     let bestScore = -Infinity;
     let move;
+    let score;
     for(let row = 0; row < 3; row++){
+      if(score === 1) break;
       for(let column = 0; column < 3; column++){
         if(GameBoard.GameBoard[row][column] === "0"){
           GameBoard.GameBoard[row][column] = ai;
-          let score = minimax(GameBoard.GameBoard,0,false);
+          score = minimax(GameBoard.GameBoard,0,false);
           GameBoard.GameBoard[row][column] = "0";
           if(score > bestScore){
             bestScore = score;
             move = {row , column};
           }
+          if(score === 1) break;
         }
       }
     }

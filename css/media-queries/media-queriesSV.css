@@ -38,6 +38,11 @@
     background-size: 4.5rem;
     background-position: 50%;
   }
+
+  .game-board-cell.active.x{
+    background-size: 4.5rem;
+    background-position: 50%;
+  }
 }
 
 @media (max-width: 31.25em){ /*500px*/
@@ -99,3 +104,10 @@
     background-size: 3.3rem;
   }
 }
+
+@media (max-width:22.1875rem){
+  .Footer{
+    flex-direction: column;
+  }
+}
+

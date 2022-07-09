@@ -1,0 +1,21 @@
+.Footer {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 2rem 1rem 1rem 1rem;
+  font-size: 2rem;
+  justify-content: center;
+}
+
+.Footer p{
+  color: #fcfefc;
+}
+
+.Git-icon{
+  transition: transform 0.3s ease-in-out;
+  max-width: none;
+  background-color: var(--clr-primary-100);
+}
+.Git-icon:hover {
+  transform: rotate(360deg) scale(1.2);
+}
