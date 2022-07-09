@@ -37,7 +37,11 @@ Users should be able to:
 
 ### What I learned
 
-With this challenge I was able to practice my HTML semantics and CSS, but also my algorithmic JS habilities.
+I learned about semantic HTML.
+
+I learned how to organize css.
+
+I learned how to implement the minimax algorithm, which helped me practice my algorithmic JS habilities.
 
 ## Author
 
