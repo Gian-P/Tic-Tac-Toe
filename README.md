@@ -24,10 +24,6 @@ Users should be able to:
 - **Bonus**: Save the game state in the browser so that it’s preserved if the player refreshes their browser
 - **Bonus**: Instead of having the computer randomly make their moves, try making it clever so it’s proactive in blocking your moves and trying to win
 
-### Screenshot
-
-![Design preview for the Calculator app coding challenge](./images/Screenshot.jpg)
-
 ## My process
 
 ### Built with
