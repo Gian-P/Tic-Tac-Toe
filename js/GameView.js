@@ -78,7 +78,6 @@ const GameBoard = (function(){
 
   function _ChangeTurn(){
     _CurrentTurn === "x" ? _CurrentTurn = "o" :  _CurrentTurn = "x";
-
     _TURN_FIGURE.setAttribute("src",`./images/icons/icon-${_CurrentTurn}-grey.svg`);
   }
 

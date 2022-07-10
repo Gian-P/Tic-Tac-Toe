@@ -142,24 +142,30 @@ button{
 }
 
 .game-board-cell.empty.preview-o::after{
-  background-image: url("/images/icons/icon-o-outline.svg");
+  /*background-image: url("/images/icons/icon-o-outline.svg");*/
+  background-image: url("/images/icons2/icon-o-outline.jpg");
   background-size: 6.4rem;
   opacity: 1;
 }
 
 .game-board-cell.active.o{
-  background: url("/images/icons/icon-o-bright-yellow.svg")
+  /*background: url("/images/icons/icon-o-bright-yellow.svg")
+  no-repeat 50% #1f3641;*/
+  background: url("/images/icons2/icon-o-bright-yellow.jpg")
   no-repeat 50% #1f3641;
 }
 
 .game-board-cell.empty.preview-x::after{
-  background-image: url("/images/icons/icon-x-outline.svg");
+  /*background-image: url("/images/icons/icon-x-outline.svg");*/
+  background-image: url("/images/icons2/icon-x-outline.jpg");
   background-size: 6.4rem;
   opacity: 1;
 }
 
 .game-board-cell.active.x{
-  background: url("/images/icons/icon-x-bright-green.svg") no-repeat 50% #1f3641;
+  /*background: url("/images/icons/icon-x-bright-green.svg") no-repeat 50% #1f3641;*/
+  background: url("/images/icons2/icon-x-bright-green.jpg") no-repeat 50% #1f3641;
+ /* background-color: ;*/
 }
 
 .game-board-cell.active{
