@@ -14,6 +14,7 @@ const GameBoard = (function(){
   const _PLAYER_1_COUNTER = document.getElementById("_PLAYER_1_COUNTER");
   const _PLAYER_2_COUNTER = document.getElementById("_PLAYER_2_COUNTER");
   const TIE = document.getElementById("Tie");
+  const IMG_RESTART = document.getElementById("img_restart");
   const MODAL = document.getElementById("modal");
   const IMG_CARTEL = document.getElementById("img_cartel");
   const MESSAGE_CARTEL = document.getElementById("message_cartel");
@@ -29,6 +30,12 @@ const GameBoard = (function(){
   });
   RIGHT_SIDE_BUTTON.addEventListener("click",function _f3(event){
     GameController.LoadRestartMessage(MODAL,MESSAGE_CARTEL,MESSAGE_DECLARATION,GREY_MEDIUM,ORANGE_MEDIUM,event);
+  });
+  RIGHT_SIDE_BUTTON.addEventListener("mouseover",function _f5(event){
+    IMG_RESTART.setAttribute("src","./images/icons/icon-restart(hover).jpeg");
+  });
+  RIGHT_SIDE_BUTTON.addEventListener("mouseout",function _f6(event){
+    IMG_RESTART.setAttribute("src","https://i.imgur.com/gQoZxJy.jpg");
   });
 
   function _f4(event){
