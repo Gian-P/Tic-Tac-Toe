@@ -221,13 +221,13 @@ const GameBoard = (function(){
     let _CpuMark = localStorage.getItem("cpu");
     if(_Combination === "xxx"){
       _PLAYER_1_COUNTER.innerText === "0" ? _PLAYER_1_COUNTER.innerText = 1 : _PLAYER_1_COUNTER.innerText = parseInt(_PLAYER_1_COUNTER.innerText) + 1;
-      if(event === "ia" && _CpuMark === "x") return _LoadWinningMessage("x","green","AI HAS WON!","message");
+      if(event === "ia" && _CpuMark === "x") return _LoadWinningMessage("x","green","CPU HAS WON!","message");
       return _LoadWinningMessage("x","green","YOU WON!","message");
     }
 
     if(_Combination === "ooo"){
       _PLAYER_2_COUNTER.innerText === "0" ? _PLAYER_2_COUNTER.innerText = 1 : _PLAYER_2_COUNTER.innerText =  parseInt(_PLAYER_2_COUNTER.innerText) + 1;
-      if(event === "ia" && _CpuMark === "o") return _LoadWinningMessage("o","yellow","AI HAS WON!","message");
+      if(event === "ia" && _CpuMark === "o") return _LoadWinningMessage("o","yellow","CPU HAS WON!","message");
       return _LoadWinningMessage("o","yellow","YOU WON!","message");
     }
     TIE.innerText === "0" ? TIE.innerText = 1 : TIE.innerText =  parseInt(TIE.innerText) + 1;   
@@ -249,7 +249,11 @@ const GameBoard = (function(){
     MESSAGE_DECLARATION.className = MessageDeclarationClass;
     GREY_MEDIUM.innerText = "QUIT";
     ORANGE_MEDIUM.innerText = "NEXT ROUND";
-    if(color) IMG_CARTEL.setAttribute("src",`./images/icons/icon-${winner}-bright-${color}.svg`);
+    if(color && winner === "x") IMG_CARTEL.setAttribute("src",`./images/icons/icon-x-bright-green(message).jpeg`);
+    else{
+      IMG_CARTEL.setAttribute("src",`./images/icons/icon-o-bright-yellow(message).jpeg`);
+    }
+    //if(color) IMG_CARTEL.setAttribute("src",`./images/icons/icon-${winner}-bright-${color}.svg`);
   }
 
   function _RemoveMessage(){
