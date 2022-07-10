@@ -77,8 +77,10 @@ const GameBoard = (function(){
   }
 
   function _ChangeTurn(){
-    _CurrentTurn === "x" ? _CurrentTurn = "o" :  _CurrentTurn = "x";
-    _TURN_FIGURE.setAttribute("src",`./images/icons/icon-${_CurrentTurn}-grey.svg`);
+    if(_CurrentTurn === "x") _TURN_FIGURE.setAttribute("src",`https://i.imgur.com/1680F0J.jpg`);
+    else{
+      _TURN_FIGURE.setAttribute("src",`https://i.imgur.com/BkQ7RtC.jpg`);
+    }
   }
 
   function _UpdateGameBoard(cell /*event*/,event ){
