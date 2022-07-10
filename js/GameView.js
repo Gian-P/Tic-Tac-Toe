@@ -77,9 +77,9 @@ const GameBoard = (function(){
   }
 
   function _ChangeTurn(){
-    if(_CurrentTurn === "x") _TURN_FIGURE.setAttribute("src",`https://i.imgur.com/1680F0J.jpg`);
+    if(_CurrentTurn === "x") _TURN_FIGURE.setAttribute("src","https://i.imgur.com/1680F0J.jpg");
     else{
-      _TURN_FIGURE.setAttribute("src",`https://i.imgur.com/BkQ7RtC.jpg`);
+      _TURN_FIGURE.setAttribute("src","https://i.imgur.com/BkQ7RtC.jpg");
     }
   }
 
