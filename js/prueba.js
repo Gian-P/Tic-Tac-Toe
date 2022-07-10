@@ -43,7 +43,7 @@ const GameBoard = (function(){
   function SetAddEventListeners(){
     _CurrentTurn = "x";
     let _CpuMark = localStorage.getItem("cpu");
-    _TURN_FIGURE.setAttribute("src",`https://i.imgur.com/1680F0J.jpg`);
+    _TURN_FIGURE.setAttribute("src",`./images/icons/icon-${_CurrentTurn}-grey.svg`);
     _InitializeGameBoard();
     for(const cell of GAMEBOARDCELLS){
       cell.addEventListener("mouseover",_mouseover);
@@ -77,11 +77,11 @@ const GameBoard = (function(){
   }
 
   function _ChangeTurn(){
-    if(_CurrentTurn === "x") _TURN_FIGURE.setAttribute("src","https://i.imgur.com/BkQ7RtC.jpg");
+    if(_CurrentTurn === "x") _TURN_FIGURE.setAttribute("src","https://i.imgur.com/1680F0J.jpg");
     else{
-      _TURN_FIGURE.setAttribute("src","https://i.imgur.com/1680F0J.jpg");
+      _TURN_FIGURE.setAttribute("src","https://i.imgur.com/BkQ7RtC.jpg");
+    }
   }
-}
 
   function _UpdateGameBoard(cell /*event*/,event ){
 
@@ -462,4 +462,3 @@ const BotController = (function(){
 
 PlayerController.SetPlayersNames();
 GameBoard.SetAddEventListeners();
-
