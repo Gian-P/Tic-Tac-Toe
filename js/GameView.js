@@ -79,11 +79,11 @@ const GameBoard = (function(){
   function _ChangeTurn(){
     if(_CurrentTurn === "x"){
       _TURN_FIGURE.setAttribute("src","https://i.imgur.com/BkQ7RtC.jpg");
-      _CurrentTurn === "o";
+      _CurrentTurn = "o";
     }
     else{
       _TURN_FIGURE.setAttribute("src","https://i.imgur.com/1680F0J.jpg");
-      _CurrentTurn === "x";
+      _CurrentTurn = "x";
   }
 }
 
